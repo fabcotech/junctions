@@ -1,0 +1,13 @@
+node_modules
+.directory
+.env
+purses-*
+.metals
+purse-*
+token-*
+dist
+purses.json
+stresslogs/*
+rnode.data*
+name-*.json
+blacklist.json
