@@ -17,14 +17,23 @@ export type JunctionRecords = [RecordA, RecordTXT];
 export type JunctionErrorCode =
   | 'RESOLVER_NOT_FOUND'
   | 'RESOLVER_ERROR'
-  | 'RECORDS_MISMATCH';
+  | 'RECORDS_MISMATCH'
+  | 'JUNCTION_MALFORMED'
+  | 'JUNCTION_MISSING_TLD';
 
 export interface JunctionError {
   code: JunctionErrorCode;
   message: string;
 }
 
-export interface JunctionResponse {
-  result?: JunctionRecords;
-  error?: JunctionError;
+export interface Ok<T> {
+  ok: true;
+  result: T;
 }
+
+export interface Err<E> {
+  ok: false;
+  error: E;
+}
+
+export type Result<T, E> = Ok<T> | Err<E>;
