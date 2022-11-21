@@ -28,8 +28,16 @@ npm start
 npm run start:server
 ```
 
-## Start cli
+## CLI
+
+Dummy server that returns "Hello World !" on localhost:3001.
 
 ```sh
-npm run start:cli
+npm run start:cli dummyserver
+```
+
+Get the hash, and what the records must be for a given endpoint.
+
+```sh
+npm run start:cli hashandconfig -- --ip 127.0.0.1 --host "apple&amazon" --port 3001
 ```
