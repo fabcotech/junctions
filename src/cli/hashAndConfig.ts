@@ -72,5 +72,5 @@ export const hashAndConfig = async () => {
   console.log(`[
   { type: "A", "host": "${host}", "data": "${ip}" },
   { type: "TXT", "host": "${host}", "data": "HASH=${hash}" }
-  ]`);
+]`);
 };
