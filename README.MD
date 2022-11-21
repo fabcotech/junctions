@@ -41,3 +41,9 @@ Get the hash, and what the records must be for a given endpoint.
 ```sh
 npm run start:cli hashandconfig -- --ip 127.0.0.1 --host "apple&amazon" --port 3001
 ```
+
+## Run tests
+
+```sh
+npm test
+```
