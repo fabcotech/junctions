@@ -11,6 +11,8 @@
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
     "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
+    "start:server": "node dist/server/index.js",
+    "start:cli": "node dist/cli/index.js",
     "start": "node ."
   },
   "repository": {
