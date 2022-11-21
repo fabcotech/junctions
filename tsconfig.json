@@ -1,26 +1,21 @@
 {
-	"compilerOptions": {
-		"baseUrl": "./src/",
-		"outDir": "./dist/",
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"target": "ES6",
-		"sourceMap": true,
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"noImplicitAny": true,
-		"noImplicitThis": true,
-		"noUnusedLocals": true,
-		"noImplicitReturns": true,
-		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true,
-	},
-	"include": [
-		"src/**/*",
-	],
-	"exclude": [
-		"node_modules",
-		"dist"
-	]
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES6",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
