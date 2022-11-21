@@ -1,0 +1,28 @@
+{
+  "name": "junctions",
+  "version": "1.0.0",
+  "description": "A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabcotech/junctions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabcotech/junctions/issues"
+  },
+  "homepage": "https://github.com/fabcotech/junctions#readme",
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}
