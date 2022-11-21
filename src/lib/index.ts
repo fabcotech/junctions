@@ -1,4 +1,4 @@
-import { resolveJunction } from './junction-resolver';
+import { resolveJunction } from './junctionResolver';
 import { dummyResolver } from './domainResolvers';
 
 export async function resolve(junction: string) {
