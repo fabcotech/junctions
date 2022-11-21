@@ -9,11 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
-          cache: 'npm'
       - run: npm ci
       - run: npm run build
       - run: npm run test:types
