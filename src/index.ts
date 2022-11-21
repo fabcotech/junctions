@@ -1,4 +1,1 @@
-function main() {
-    console.log('tot 2');
-    return [];
-}
+export { resolveJunction } from './junction-resolver';
