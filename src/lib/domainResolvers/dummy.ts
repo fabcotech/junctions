@@ -11,7 +11,7 @@ const dummyResolver: DomainResolver = {
       {
         type: 'TXT',
         name: domain,
-        data: 'HASH=abddef',
+        data: 'HASH=abcdef',
       },
     ]);
   },

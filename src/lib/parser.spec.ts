@@ -1,5 +1,10 @@
 import { expect } from 'chai';
-import { parse } from './parser';
+import {
+  getJunctionSubdomain,
+  JUNCTION_OPERATOR,
+  JUNCTION_SUB_DOMAIN,
+  parse,
+} from './parser';
 import { dummyResolver } from './domainResolvers';
 
 describe('parser', () => {
@@ -45,6 +50,13 @@ describe('parser', () => {
     const r = parse(resolvers, 'foo.notResolvable & bar.notResolvable');
     expect(r.ok).to.be.false;
   });
+  it('should replace . and & characters in junctions', () => {
+    const junction = 'foo.dummy & bar.dummy';
+    const subdomain = getJunctionSubdomain(junction);
+    expect(subdomain).to.eql(
+      `foo${JUNCTION_SUB_DOMAIN}dummy${JUNCTION_OPERATOR}bar${JUNCTION_SUB_DOMAIN}dummy`
+    );
+  });
   it('should return domain resolver map', () => {
     const resolvers = [dummyResolver];
     const r = parse(resolvers, 'foo.dummy & bar.dummy');
@@ -52,11 +64,11 @@ describe('parser', () => {
     if (r.ok) {
       expect(r.result).to.deep.equals([
         {
-          domain: 'foo.dummy',
+          domain: `${getJunctionSubdomain('foo.dummy & bar.dummy')}.foo.dummy`,
           resolver: dummyResolver,
         },
         {
-          domain: 'bar.dummy',
+          domain: `${getJunctionSubdomain('foo.dummy & bar.dummy')}.bar.dummy`,
           resolver: dummyResolver,
         },
       ]);
