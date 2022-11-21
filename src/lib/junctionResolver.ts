@@ -66,6 +66,26 @@ export function validateResolvedDomains(
   };
 }
 
+export function reconcileRecords(junctionRecords: JunctionRecords[]) {
+  return junctionRecords
+    .map((records) =>
+      records.map((r) => ({
+        type: r.type,
+        data: r.data,
+      }))
+    )
+    .filter(
+      (r) =>
+        !isEqual(
+          r,
+          junctionRecords[0].map((r) => ({
+            type: r.type,
+            data: r.data,
+          }))
+        )
+    );
+}
+
 export async function resolveJunction(
   resolvers: DomainResolver[],
   junction: string
@@ -88,24 +108,9 @@ export async function resolveJunction(
     };
   }
 
-  const notSameRecords = resolvedDomains.result
-    .map((records) =>
-      records.map((r) => ({
-        type: r.type,
-        data: r.data,
-      }))
-    )
-    .filter(
-      (r) =>
-        !isEqual(
-          r,
-          resolvedDomains.result[0].map((r) => ({
-            type: r.type,
-            data: r.data,
-          }))
-        )
-    );
-  if (notSameRecords.length > 0) {
+  const differentsRecords = reconcileRecords(resolvedDomains.result);
+
+  if (differentsRecords.length > 0) {
     return {
       ok: false,
       error: {
