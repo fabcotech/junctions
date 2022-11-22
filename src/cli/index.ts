@@ -20,12 +20,19 @@ junction [command] [options]`
     aliases: ['r'],
     describe: 'Resolve junction',
     builder: (yargs) => {
-      return yargs.option('junction', {
-        demandOption: true,
-        alias: 'j',
-        describe: 'junction to resolve',
-        type: 'string',
-      });
+      return yargs
+        .option('junction', {
+          demandOption: true,
+          alias: 'j',
+          describe: 'junction to resolve',
+          type: 'string',
+        })
+        .option('verbose', {
+          alias: 'v',
+          default: false,
+          type: 'boolean',
+          describe: 'verbose output',
+        });
     },
     handler: (argv) => {
       resolveJunction(argv);
