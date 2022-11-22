@@ -64,7 +64,7 @@ junction [command] [options]`
   .command({
     command: 'hashandconfig <junction>',
     aliases: ['c'],
-    describe: 'Generate junction records for Dappy',
+    describe: 'Generate junction records',
     builder: (yargs) => {
       return yargs
         .option('junction', {

@@ -15,15 +15,15 @@ npm i -g @fabcotech/junctions
 ```
 junction [command] [options]
 
-Commands :
-  junctions resolve <junction>  Resolve junction                     [alias : r]
-  junctions dummyserver         Start a dummy http server            [alias : s]
-  junctions hashandconfig       Generate junction records for Dappy  [alias : c]
-  junctions completion          generate completion script
+Commandes :
+  junctions resolve <junction>        Resolve junction               [alias : r]
+  junctions dummyserver               Start a dummy http server      [alias : s]
+  junctions hashandconfig <junction>  Generate junction records      [alias : c]
+  junctions completion                generate completion script
 
 Options :
-  --help     Affiche l'aide                                            [boolean]
-  --version  Affiche le numéro de version                              [boolean]
+  --help     Affiche l'aide                                            [booléen]
+  --version  Affiche le numéro de version                              [booléen]
 ```
 
 ### Commands
@@ -43,7 +43,7 @@ junctions dummyserver
 Get the hash, and what the records must be for a given endpoint.
 
 ```sh
-junctions hashandconfig --ip 127.0.0.1 --host "apple&amazon" --port 3001
+junctions hashandconfig 'foo.dummy & bar.dummy' --ip 127.0.0.1 --host "foo&bar" --port 3001
 ```
 
 ## Start dev
