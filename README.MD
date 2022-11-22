@@ -2,30 +2,10 @@
 
 A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.
 
-## Start dev
+## How to install
 
-```sh
-npm run build & npm start
 ```
-
-or
-
-In a dedicated terminal
-
-```sh
-npm run build:watch
-```
-
-and another terminal
-
-```sh
-npm start
-```
-
-## Start server
-
-```sh
-npm run start:server
+npm i -g @fabcotech/junctions
 ```
 
 ## CLI
@@ -64,6 +44,32 @@ Get the hash, and what the records must be for a given endpoint.
 
 ```sh
 junctions hashandconfig --ip 127.0.0.1 --host "apple&amazon" --port 3001
+```
+
+## Start dev
+
+```sh
+npm run build & npm start
+```
+
+or
+
+In a dedicated terminal
+
+```sh
+npm run build:watch
+```
+
+and another terminal
+
+```sh
+npm start
+```
+
+## Start server
+
+```sh
+npm run start:server
 ```
 
 ## Run tests
