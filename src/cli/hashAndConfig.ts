@@ -1,8 +1,6 @@
 import http, { IncomingHttpHeaders } from 'http';
 import { blake2sHex } from 'blakejs';
 
-import { getProcessArgv } from './utils';
-
 interface HttpResponse {
   data: string;
   headers: IncomingHttpHeaders;
@@ -11,7 +9,7 @@ interface HttpResponse {
 const httpRequest = async (
   ip: string,
   host: string,
-  port = '3001'
+  port = 3001
 ): Promise<HttpResponse> => {
   const options = {
     host: ip,
@@ -49,24 +47,15 @@ const httpRequest = async (
   return data;
 };
 
-export const hashAndConfig = async () => {
-  const host = getProcessArgv('--host');
-  if (!host) {
-    console.log('need --host argument');
-    process.exit(1);
-  }
-
-  const ip = getProcessArgv('--ip');
-  if (!ip) {
-    console.log('need --ip argument');
-    process.exit(1);
-  }
-
-  let port = getProcessArgv('--port');
-  if (!port) {
-    console.log('Setting default port to 80');
-    port = '80';
-  }
+export const hashAndConfig = async ({
+  host,
+  ip,
+  port,
+}: {
+  host: string;
+  ip: string;
+  port: number;
+}) => {
   const { data } = await httpRequest(ip, host, port);
   const hash = blake2sHex(data);
   console.log('\ndata retreived :\n');
