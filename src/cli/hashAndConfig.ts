@@ -1,13 +1,18 @@
-import http from 'http';
+import http, { IncomingHttpHeaders } from 'http';
 import { blake2sHex } from 'blakejs';
 
 import { getProcessArgv } from './utils';
 
-const getData = async (
+interface HttpResponse {
+  data: string;
+  headers: IncomingHttpHeaders;
+}
+
+const httpRequest = async (
   ip: string,
   host: string,
   port = '3001'
-): Promise<{ data: string; headers: { [key: string]: string } }> => {
+): Promise<HttpResponse> => {
   const options = {
     host: ip,
     method: 'GET',
@@ -18,7 +23,7 @@ const getData = async (
     },
   };
 
-  const data = await new Promise((resolve, reject) => {
+  const data = await new Promise<HttpResponse>((resolve, reject) => {
     const req = http.request(options, (resp) => {
       if (resp.statusCode !== 200) {
         reject(`Status code is not 200 : ${resp.statusCode}`);
@@ -41,7 +46,7 @@ const getData = async (
     req.end();
   });
 
-  return data as { data: string; headers: { [key: string]: string } };
+  return data;
 };
 
 export const hashAndConfig = async () => {
@@ -62,7 +67,7 @@ export const hashAndConfig = async () => {
     console.log('Setting default port to 80');
     port = '80';
   }
-  const { data } = await getData(ip, host, port);
+  const { data } = await httpRequest(ip, host, port);
   const hash = blake2sHex(data);
   console.log('\ndata retreived :\n');
   console.log(data);
