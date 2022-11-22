@@ -19,14 +19,12 @@ export interface DomainResolverMap {
   domain: string;
   resolver: DomainResolver;
 }
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
-export const allDomainAreResolvable = (
-  map: PartialBy<DomainResolverMap, 'resolver'>[]
-): map is DomainResolverMap[] => {
-  return map.every((m) => m.resolver);
-};
+// export const domainsNotResolvables = (
+//   map: PartialBy<DomainResolverMap, 'resolver'>[]
+// ) => {
+//   return map.filter((m) => !m.resolver);
+// };
 
 export function parse(
   resolvers: DomainResolver[],
@@ -62,22 +60,29 @@ export function parse(
     const resolver = resolvers.find((r) => r.canResolve(part));
     return {
       domain: `${getJunctionSubdomain(junction)}.${part}`,
+      zone: part,
       resolver,
     };
   });
 
-  if (!allDomainAreResolvable(domainResolverMap)) {
+  const domainsNotResolvables = domainResolverMap
+    .filter((m) => !m.resolver)
+    .map((m) => m.zone);
+
+  if (domainsNotResolvables.length > 0) {
     return {
       ok: false,
       error: {
         code: 'RESOLVER_NOT_FOUND',
-        message: 'Resolver not found',
+        message: `Resolvers not found for domain(s): ${domainsNotResolvables.join(
+          ', '
+        )}`,
       },
     };
   }
 
   return {
     ok: true,
-    result: domainResolverMap,
+    result: domainResolverMap as DomainResolverMap[],
   };
 }

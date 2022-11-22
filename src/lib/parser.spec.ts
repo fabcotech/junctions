@@ -52,6 +52,12 @@ describe('parser', () => {
     const resolvers = [dummyResolver];
     const r = parse(resolvers, 'foo.notResolvable & bar.notResolvable');
     expect(r.ok).to.be.false;
+    if (!r.ok) {
+      expect(r.error.code).to.eql('RESOLVER_NOT_FOUND');
+      expect(r.error.message).to.eql(
+        'Resolvers not found for domain(s): foo.notResolvable, bar.notResolvable'
+      );
+    }
   });
   it('should replace . and & characters in junctions', () => {
     const junction = 'foo.dummy & bar.dummy';
@@ -68,10 +74,12 @@ describe('parser', () => {
       expect(r.result).to.deep.equals([
         {
           domain: `${getJunctionSubdomain('foo.dummy & bar.dummy')}.foo.dummy`,
+          zone: 'foo.dummy',
           resolver: dummyResolver,
         },
         {
           domain: `${getJunctionSubdomain('foo.dummy & bar.dummy')}.bar.dummy`,
+          zone: 'bar.dummy',
           resolver: dummyResolver,
         },
       ]);
