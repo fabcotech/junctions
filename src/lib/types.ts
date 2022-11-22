@@ -17,6 +17,8 @@ export type JunctionRecords = [RecordA, RecordTXT];
 export type JunctionErrorCode =
   | 'RESOLVER_NOT_FOUND'
   | 'RESOLVER_ERROR'
+  | 'RESOLVER_ERROR_A_RECORD_NOT_FOUND'
+  | 'RESOLVER_ERROR_TXT_HASH_RECORD_NOT_FOUND'
   | 'RECORDS_MISMATCH'
   | 'JUNCTION_MALFORMED'
   | 'JUNCTION_MISSING_TLD';

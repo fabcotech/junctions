@@ -8,32 +8,24 @@ export async function resolveDomain(
   domain: string,
   verbose: boolean = false
 ): Promise<Result<JunctionRecords, JunctionError>> {
-  try {
-    const result = await resolver.resolve(domain);
+  const r = await resolver.resolve(domain);
+  if (!r.ok) {
     if (verbose) {
-      console.log(`${domain} -> A: ${result[0].data}, TXT: ${result[1].data}`);
+      console.log(`${domain} -> Error: ${r.error.message}`);
     }
     return {
-      ok: true,
-      result,
+      ok: false,
+      error: r.error,
     };
-  } catch (err) {
-    if (err instanceof Error) {
-      return {
-        ok: false,
-        error: {
-          code: 'RESOLVER_ERROR',
-          message: `Failed to resolve ${domain}: ${err.message}`,
-        },
-      };
-    }
+  }
+  if (verbose) {
+    console.log(
+      `${domain} -> A: ${r.result[0].data}, TXT: ${r.result[1].data}`
+    );
   }
   return {
-    ok: false,
-    error: {
-      code: 'RESOLVER_ERROR',
-      message: `Failed to resolve ${domain}`,
-    },
+    ok: true,
+    result: r.result,
   };
 }
 
@@ -111,6 +103,7 @@ export async function resolveJunction(
 ): Promise<Result<JunctionRecords, JunctionError>> {
   if (verbose) {
     console.log('Resolving junction', junction);
+    console.log();
   }
 
   const domainResolverMap = parse(resolvers, junction);

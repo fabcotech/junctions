@@ -1,7 +1,11 @@
 import { resolveJunction } from './junctionResolver';
-import { dummyResolver } from './domainResolvers';
+import {
+  dappyDResolver,
+  dappyGammaResolver,
+  dummyResolver,
+} from './domainResolvers';
 
 export async function resolve(junction: string, verbose: boolean = false) {
-  const resolvers = [dummyResolver];
+  const resolvers = [dummyResolver, dappyGammaResolver, dappyDResolver];
   return resolveJunction(resolvers, junction, verbose);
 }

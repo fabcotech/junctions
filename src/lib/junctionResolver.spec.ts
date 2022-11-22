@@ -13,25 +13,34 @@ const successResolver = ({
   endsWith?: string;
 } = {}): DomainResolver => ({
   resolve: async (domain: string) => {
-    return Promise.resolve([
-      {
-        type: 'A',
-        name: domain,
-        data: ip || '127.0.0.1',
-      },
-      {
-        type: 'TXT',
-        name: domain,
-        data: hash || 'HASH=abcdef',
-      },
-    ]);
+    return Promise.resolve({
+      ok: true,
+      result: [
+        {
+          type: 'A',
+          name: domain,
+          data: ip || '127.0.0.1',
+        },
+        {
+          type: 'TXT',
+          name: domain,
+          data: hash || 'HASH=abcdef',
+        },
+      ],
+    });
   },
   canResolve: (domain: string) => domain.endsWith(endsWith || '.resolved'),
 });
 
 const failResolver = (): DomainResolver => ({
   resolve: async (domain: string) => {
-    return Promise.reject(new Error('Failed'));
+    return Promise.resolve({
+      ok: false,
+      error: {
+        code: 'RESOLVER_ERROR',
+        message: `Failed to resolve ${domain}`,
+      },
+    });
   },
   canResolve: (domain: string) => domain.endsWith('.failed'),
 });
