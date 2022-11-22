@@ -38,11 +38,14 @@ describe('parser', () => {
     }
   });
   it('should support only domains with TLD', () => {
-    const r = parse([], 'foo.dummy&bar');
+    const r = parse([], 'foo.dummy&bar&baz');
 
     expect(r.ok).to.be.false;
     if (!r.ok) {
       expect(r.error.code).to.eql('JUNCTION_MISSING_TLD');
+      expect(r.error.message).to.eql(
+        "Following domain(s) don't have a TLD: bar, baz"
+      );
     }
   });
   it('should fail on not resolvable domain', () => {

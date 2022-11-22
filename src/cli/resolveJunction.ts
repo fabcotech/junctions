@@ -1,4 +1,3 @@
-import { cp } from 'fs';
 import { resolve } from '../lib';
 
 export const resolveJunction = async (argv: { junction: string }) => {

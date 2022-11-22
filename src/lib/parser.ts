@@ -43,13 +43,17 @@ export function parse(
     };
   }
 
-  const areAllTLDsDomains = junctionParts.every((part) => /.+\..+/.test(part));
-  if (!areAllTLDsDomains) {
+  const domainsWithoutTLD = junctionParts.filter(
+    (part) => !/.+\..+/.test(part)
+  );
+  if (domainsWithoutTLD.length > 0) {
     return {
       ok: false,
       error: {
         code: 'JUNCTION_MISSING_TLD',
-        message: 'Junction contains domain(s) without TLD',
+        message: `Following domain(s) don't have a TLD: ${domainsWithoutTLD.join(
+          ', '
+        )}`,
       },
     };
   }
