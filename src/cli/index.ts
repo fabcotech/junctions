@@ -62,16 +62,22 @@ junction [command] [options]`
     },
   })
   .command({
-    command: 'hashandconfig',
+    command: 'hashandconfig <junction>',
     aliases: ['c'],
     describe: 'Generate junction records for Dappy',
     builder: (yargs) => {
       return yargs
+        .option('junction', {
+          demandOption: true,
+          alias: 'j',
+          describe: 'junction',
+          type: 'string',
+        })
         .option('host', {
           default: '127.0.0.1',
-          alias: 'h',
-          describe: 'Host',
+          describe: 'host',
           type: 'string',
+          alias: 'h',
         })
         .option('ip', {
           default: '127.0.0.1',

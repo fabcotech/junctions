@@ -1,5 +1,6 @@
 import http, { IncomingHttpHeaders } from 'http';
 import { blake2sHex } from 'blakejs';
+import { getJunctionSubdomain } from '../lib/parser';
 
 interface HttpResponse {
   data: string;
@@ -48,10 +49,12 @@ const httpRequest = async (
 };
 
 export const hashAndConfig = async ({
+  junction,
   host,
   ip,
   port,
 }: {
+  junction: string;
   host: string;
   ip: string;
   port: number;
@@ -64,7 +67,9 @@ export const hashAndConfig = async ({
   console.log(hash);
   console.log('\nrecords needed for junction :\n');
   console.log(`[
-  { type: "A", "host": "${host}", "data": "${ip}" },
-  { type: "TXT", "host": "${host}", "data": "HASH=${hash}" }
+  { "type": "A", "name": "${getJunctionSubdomain(junction)}", "data": "${ip}" },
+  { "type": "TXT", "name": "${getJunctionSubdomain(
+    junction
+  )}", "data": "HASH=${hash}" }
 ]`);
 };
