@@ -4,17 +4,35 @@ import yargs from 'yargs';
 import chalk from 'chalk';
 import { dummyServer } from './dummyServer';
 import { hashAndConfig } from './hashAndConfig';
+import { resolveJunction } from './resolveJunction';
 
 const title = chalk.yellow('CLI junction');
 
 yargs(process.argv.slice(2))
+  .scriptName('junction')
   .usage(
     `${title}
 junction [command] [options]`
   )
   .command({
+    command: 'resolve <junction>',
+    aliases: ['r'],
+    describe: 'Resolve junction',
+    builder: (yargs) => {
+      return yargs.option('junction', {
+        demandOption: true,
+        alias: 'j',
+        describe: 'junction to resolve',
+        type: 'string',
+      });
+    },
+    handler: (argv) => {
+      resolveJunction(argv);
+    },
+  })
+  .command({
     command: 'dummyserver',
-    aliases: ['ds'],
+    aliases: ['s'],
     describe: 'Start a dummy server',
     builder: (yargs) => {
       return yargs
@@ -37,7 +55,7 @@ junction [command] [options]`
   })
   .command({
     command: 'hashandconfig',
-    aliases: ['hc'],
+    aliases: ['c'],
     describe: 'Generate junction records for Dappy',
     builder: (yargs) => {
       return yargs
