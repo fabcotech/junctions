@@ -1,8 +1,11 @@
 {
-  "name": "junctions",
+  "name": "@fabcotech/junctions",
   "version": "1.0.0",
   "description": "A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.",
   "main": "dist/lib/index.js",
+  "bin": {
+    "junctions": "./dist/cli/index.js"
+  },
   "engines": {
     "node": ">= 16"
   },
@@ -16,9 +19,6 @@
     "test:types": "npx tsc --project ./tsconfig.json --noEmit",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'src/**/*.spec.ts'",
     "start": "node ."
-  },
-  "bin": {
-    "junctions": "./dist/cli/index.js"
   },
   "repository": {
     "type": "git",
