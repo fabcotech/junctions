@@ -30,20 +30,45 @@ npm run start:server
 
 ## CLI
 
+### Description
+
+```
+junction [command] [options]
+
+Commands :
+  junctions resolve <junction>  Resolve junction                     [alias : r]
+  junctions dummyserver         Start a dummy http server            [alias : s]
+  junctions hashandconfig       Generate junction records for Dappy  [alias : c]
+  junctions completion          generate completion script
+
+Options :
+  --help     Affiche l'aide                                            [boolean]
+  --version  Affiche le numéro de version                              [boolean]
+```
+
+### Commands
+
+Resolve a junction in verbose mode
+
+```sh
+junctions resolve 'foo.dummy & bar.dummy' -v
+```
+
 Dummy server that returns "Hello World !" on localhost:3001.
 
 ```sh
-npm run start:cli dummyserver
+junctions dummyserver
 ```
 
 Get the hash, and what the records must be for a given endpoint.
 
 ```sh
-npm run start:cli hashandconfig -- --ip 127.0.0.1 --host "apple&amazon" --port 3001
+junctions hashandconfig --ip 127.0.0.1 --host "apple&amazon" --port 3001
 ```
 
 ## Run tests
 
 ```sh
 npm test
+npm test:types
 ```

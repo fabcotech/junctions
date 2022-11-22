@@ -18,7 +18,7 @@
     "start": "node ."
   },
   "bin": {
-    "junction": "./dist/cli/index.js"
+    "junctions": "./dist/cli/index.js"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,6 @@
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
     "@types/yargs": "^17.0.13",
-    "blakejs": "^1.2.1",
     "chai": "^4.3.7",
     "mocha": "^10.1.0",
     "prettier": "^2.7.1",
@@ -45,6 +44,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "blakejs": "^1.2.1",
     "chalk": "^4.0.0",
     "lodash.isequal": "^4.5.0",
     "yargs": "^17.6.2"

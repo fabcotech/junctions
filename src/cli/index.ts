@@ -10,7 +10,7 @@ const title = chalk.yellow('CLI junction');
 
 yargs(process.argv.slice(2))
   .strict()
-  .scriptName('junction')
+  .scriptName('junctions')
   .usage(
     `${title}
 junction [command] [options]`
@@ -41,7 +41,7 @@ junction [command] [options]`
   .command({
     command: 'dummyserver',
     aliases: ['s'],
-    describe: 'Start a dummy server',
+    describe: 'Start a dummy http server',
     builder: (yargs) => {
       return yargs
         .option('ip', {
