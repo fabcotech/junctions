@@ -1,3 +1,5 @@
+import process from 'process';
+
 export const getProcessArgv = (param: string) => {
   const index = process.argv.findIndex((arg) => arg === param);
   if (index === -1) {

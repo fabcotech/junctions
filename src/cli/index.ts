@@ -1,5 +1,6 @@
 import { dummyServer } from './dummyServer';
 import { hashAndConfig } from './hashAndConfig';
+import process from 'process';
 
 function argvInclude(cmd: string) {
   return process.argv.includes(cmd);
