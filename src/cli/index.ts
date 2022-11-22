@@ -9,6 +9,7 @@ import { resolveJunction } from './resolveJunction';
 const title = chalk.yellow('CLI junction');
 
 yargs(process.argv.slice(2))
+  .strict()
   .scriptName('junction')
   .usage(
     `${title}
@@ -82,6 +83,7 @@ junction [command] [options]`
       hashAndConfig(argv);
     },
   })
-  .demandCommand();
+  .demandCommand()
+  .completion();
 
 yargs.parse();
