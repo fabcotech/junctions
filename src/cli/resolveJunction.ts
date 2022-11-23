@@ -13,8 +13,10 @@ export const resolveJunction = async (argv: {
   if (r.ok) {
     ip = r.result[0].data;
     expectedHash = r.result[1].data.replace('HASH=', '');
-    console.log(`\nIP address :           ${ip}`);
-    console.log(`Hash of the content :  ${expectedHash}`);
+    console.log(`\nIP address of web service :\n${ip}\n`);
+    console.log(
+      `Expected hash of the data (from name systems) :\n${expectedHash}\n`
+    );
   }
 
   if (!r.ok) {
@@ -43,8 +45,8 @@ export const resolveJunction = async (argv: {
   }
 
   console.log('\n\x1b[32mLoading of data successful !\x1b[0m Hashes match.');
-  console.log('\ndata :\n');
+  console.log('\ndata :');
   console.log((resultOfLoad as any).result.data);
-  console.log('\ncontent-type :\n');
+  console.log('\ncontent-type :');
   console.log((resultOfLoad as any).result['Content-Type']);
 };
