@@ -55,7 +55,7 @@ describe('parser', () => {
     if (!r.ok) {
       expect(r.error.code).to.eql('RESOLVER_NOT_FOUND');
       expect(r.error.message).to.eql(
-        'Resolvers not found for domain(s): foo.notResolvable, bar.notResolvable'
+        'Resolvers not found for domain(s): bar.notResolvable, foo.notResolvable'
       );
     }
   });
@@ -63,7 +63,7 @@ describe('parser', () => {
     const junction = 'foo.dummy & bar.dummy';
     const subdomain = getJunctionSubdomain(junction);
     expect(subdomain).to.eql(
-      `foo${JUNCTION_SUB_DOMAIN}dummy${JUNCTION_OPERATOR}bar${JUNCTION_SUB_DOMAIN}dummy`
+      `bar${JUNCTION_SUB_DOMAIN}dummy${JUNCTION_OPERATOR}foo${JUNCTION_SUB_DOMAIN}dummy`
     );
   });
   it('should return domain resolver map', () => {
@@ -73,13 +73,13 @@ describe('parser', () => {
     if (r.ok) {
       expect(r.result).to.deep.equals([
         {
-          domain: `${getJunctionSubdomain('foo.dummy & bar.dummy')}.foo.dummy`,
-          zone: 'foo.dummy',
+          domain: `${getJunctionSubdomain('bar.dummy & foo.dummy')}.bar.dummy`,
+          zone: 'bar.dummy',
           resolver: dummyResolver,
         },
         {
-          domain: `${getJunctionSubdomain('foo.dummy & bar.dummy')}.bar.dummy`,
-          zone: 'bar.dummy',
+          domain: `${getJunctionSubdomain('bar.dummy & foo.dummy')}.foo.dummy`,
+          zone: 'foo.dummy',
           resolver: dummyResolver,
         },
       ]);
