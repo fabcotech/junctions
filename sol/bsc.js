@@ -63,6 +63,9 @@ const deploy = async () => {
   sentTx.on('confirmation', function (confirmation) {
     console.log('on confirmation');
     console.log(confirmation);
+    if (confirmation === 4) {
+      process.exit(0);
+    }
   });
 
   sentTx.on('transactionHash', function (hash) {
