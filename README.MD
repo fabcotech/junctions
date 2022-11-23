@@ -23,7 +23,7 @@ npm i -g @fabcotech/junctions
 ```
 junction [command] [options]
 
-Commandes :
+Commands :
   junctions resolve <junction>        Resolve junction               [alias : r]
   junctions dummyserver               Start a dummy http server      [alias : s]
   junctions hashandconfig <junction>  Generate junction records      [alias : c]

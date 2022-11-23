@@ -21,8 +21,8 @@ Example zone file :
 {
     "origin": "amazon",
     "records": [
-        { "name": "amazon&apple", "type": "TXT", "data": "HASH=abddef" },
-        { "name": "amazon&apple", "type": "A", "data": "12.13.14.15" }
+        { "name": "amazon.com&apple.d", "type": "TXT", "data": "HASH=abddef" },
+        { "name": "amazon.com&apple.d", "type": "A", "data": "12.13.14.15" }
     ]
 },
 ```
@@ -47,7 +47,7 @@ ResolverBNS: (host: string) => [RecordA, RecordTXT];
 ResolverDNS: (host: string) => [RecordA, RecordTXT];
 ```
 
-#### (3) Reconciler 
+#### (3) Reconciler
 
 Check if all hosts have resolved to exactly same hash (TXT) record and A record.
 
@@ -55,7 +55,7 @@ Check if all hosts have resolved to exactly same hash (TXT) record and A record.
 Reconciler: ([RecordA, RecordTXT][]) => boolean
 ```
 
-#### (4) Requester 
+#### (4) Requester
 
 Do the request, check hash of whatever is sent back.
 

@@ -11,3 +11,4 @@ stresslogs/*
 rnode.data*
 name-*.json
 blacklist.json
+sol/env.js
