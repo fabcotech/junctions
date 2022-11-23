@@ -46,11 +46,13 @@ export async function resolveDomains(
   );
   const errors = results.filter((r) => !r.ok);
 
-  console.log(
-    `\n\x1b[32mResolution successful !\x1b[0m Resolved domains: ${
-      results.length - errors.length
-    }/${results.length}`
-  );
+  if (verbose) {
+    console.log(
+      `\n\x1b[32mResolution successful !\x1b[0m Resolved domains: ${
+        results.length - errors.length
+      }/${results.length}`
+    );
+  }
 
   if (containsErrors(results)) {
     if (verbose) {
@@ -100,7 +102,9 @@ export async function resolveJunction(
   junction: string,
   verbose: boolean = false
 ): Promise<Result<JunctionRecords, JunctionError>> {
-  console.log(`Resolving junction \x1b[36m${junction}\x1b[0m \n`);
+  if (verbose) {
+    console.log(`Resolving junction \x1b[36m${junction}\x1b[0m \n`);
+  }
 
   const domainResolverMap = parse(resolvers, junction);
 
