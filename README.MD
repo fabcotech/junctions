@@ -8,7 +8,7 @@ A new syntax in the address bar, and service discovery system that allows web se
   - `.d` domain names: domain names available on dappy d network (mainnet)
   - `.gamma` domain names: domain names available on dappy gamma network
 - [dummy](./src/lib/domainResolvers/dummy.ts):
-  - `.dummy` domain names: For test purposes, always resolve to [RecordA: 127.0.0.1, RecordTXT: HASH=abcdef]
+  - `.dummy` domain names: For test purposes, always resolve to [RecordA: 127.0.0.1, RecordTXT: HASH=7316723...]
 
 ## How to use it
 
