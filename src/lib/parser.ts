@@ -20,7 +20,7 @@ export const getJunctionSubdomain = (
   const hash = blake2sHex(getJunctionParts(junction).join('&')).slice(0, 16);
   if (verbose) {
     console.log(
-      `\nHash of junction "${getJunctionParts(junction).join(
+      `\nSubdomain (short hash) of junction "${getJunctionParts(junction).join(
         ' & '
       )}" is ${hash}\n`
     );

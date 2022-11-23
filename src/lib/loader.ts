@@ -56,13 +56,13 @@ export async function loader(
   port = 3001
 ): Promise<Result<LoadResult, JunctionError>> {
   if (verbose) {
-    console.log(`Expected Hash : ${expectedHash}`);
+    console.log(`Expected data hash : ${expectedHash}`);
     console.log(`Loading ${ip}:${port} @ host:${junction}`);
   }
   const result = await httpRequest(ip as string, junction);
   const dataHash = blake2sHex(result.data);
   if (verbose) {
-    console.log(`Actual Hash   : ${dataHash}`);
+    console.log(`Actual data hash   : ${dataHash}`);
   }
 
   if (dataHash !== expectedHash) {
