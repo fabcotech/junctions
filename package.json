@@ -20,6 +20,9 @@
     "start:server": "node dist/server/index.js",
     "start:cli": "node dist/cli/index.js",
     "test:types": "npx tsc --project ./tsconfig.json --noEmit",
+    "test:sol": "hardhat test",
+    "build:sol": "hardhat compile",
+    "deploy:sol:bsc:testnet": "hardhat run --network bsctestnet scripts/deploy.ts",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'src/**/*.spec.ts'",
     "start": "node ."
   },
