@@ -37,10 +37,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
     getContractFactory(
-      name: "BadgeToken",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.BadgeToken__factory>;
-    getContractFactory(
       name: "NameSystem",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.NameSystem__factory>;
@@ -75,11 +71,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
-    getContractAt(
-      name: "BadgeToken",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.BadgeToken>;
     getContractAt(
       name: "NameSystem",
       address: string,

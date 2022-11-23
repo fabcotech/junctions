@@ -1,7 +1,6 @@
 import hre from 'hardhat';
 
 async function main() {
-  //@ts-ignore
   const NameSystem = await hre.ethers.getContractFactory('NameSystem');
   console.log('Deploying NameSystem ERC721 token...');
   const token = await NameSystem.deploy('NameSystem', 'Name');

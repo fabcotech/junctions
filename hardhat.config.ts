@@ -17,10 +17,6 @@ const config: HardhatUserConfig = {
       accounts: [process.env.PRIVATE_KEY],
     },
   },
-  paths: {
-    root: './src/sol',
-    tests: './test',
-  },
 };
 
 export default config;

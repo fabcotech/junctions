@@ -18,7 +18,5 @@ export type { ERC165 } from "./@openzeppelin/contracts/utils/introspection/ERC16
 export { ERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/ERC165__factory";
 export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC165";
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
-export type { BadgeToken } from "./contracts/NameSystem.sol/BadgeToken";
-export { BadgeToken__factory } from "./factories/contracts/NameSystem.sol/BadgeToken__factory";
-export type { NameSystem } from "./contracts/NameSystem.sol/NameSystem";
-export { NameSystem__factory } from "./factories/contracts/NameSystem.sol/NameSystem__factory";
+export type { NameSystem } from "./contracts/NameSystem";
+export { NameSystem__factory } from "./factories/contracts/NameSystem__factory";
