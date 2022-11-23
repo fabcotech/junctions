@@ -8,14 +8,12 @@ export const resolveJunction = async (argv: {
   const { junction, verbose, load } = argv;
   const r = await resolve(junction, verbose);
 
-  let ip;
-  let expectedHash;
   if (r.ok) {
-    ip = r.result[0].data;
-    expectedHash = r.result[1].data.replace('HASH=', '');
-    console.log(`\nIP address of web service (from A record) :\n${ip}\n`);
     console.log(
-      `Expected hash of the data (from TXT record) :\n${expectedHash}\n`
+      `\nIP address of web service (from A record) :\n${r.result.ip}\n`
+    );
+    console.log(
+      `Expected hash of the data (from TXT record) :\n${r.result.hash}\n`
     );
   }
 
@@ -30,9 +28,9 @@ export const resolveJunction = async (argv: {
     console.log('Now loading the data and checking the hashes');
   }
   const resultOfLoad = await loader(
-    expectedHash as string,
-    ip as string,
-    junction,
+    r.result.hash,
+    r.result.ip,
+    r.result.hostname,
     verbose
   );
   if (!resultOfLoad.ok) {

@@ -9,7 +9,7 @@ interface HttpResponse {
 
 export const httpRequest = async (
   ip: string,
-  host: string,
+  hostname: string,
   port = 3001
 ): Promise<HttpResponse> => {
   const options = {
@@ -18,7 +18,7 @@ export const httpRequest = async (
     port,
     path: `/`,
     headers: {
-      Host: host,
+      Host: hostname,
     },
   };
 
@@ -51,15 +51,15 @@ export const httpRequest = async (
 export async function loader(
   expectedHash: string,
   ip: string,
-  junction: string,
+  hostname: string,
   verbose: boolean,
   port = 3001
 ): Promise<Result<LoadResult, JunctionError>> {
   if (verbose) {
     console.log(`Expected data hash : ${expectedHash}`);
-    console.log(`Loading ${ip}:${port} @ host:${junction}`);
+    console.log(`Loading ${ip}:${port} @ hostname:${hostname}`);
   }
-  const result = await httpRequest(ip as string, junction);
+  const result = await httpRequest(ip as string, hostname);
   const dataHash = blake2sHex(result.data);
   if (verbose) {
     console.log(`Actual data hash   : ${dataHash}`);

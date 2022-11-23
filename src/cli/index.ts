@@ -56,6 +56,12 @@ junction [command] [options]`
           type: 'string',
           alias: 'i',
         })
+        .option('file', {
+          default: './examples/helloworld.html',
+          describe: 'file to server',
+          type: 'string',
+          alias: 'f',
+        })
         .option('port', {
           default: 3001,
           describe: 'port',
@@ -76,18 +82,23 @@ junction [command] [options]`
         .option('junction', {
           demandOption: true,
           alias: 'j',
-          describe: 'junction',
+          describe: 'junction (ex: "foo.d & bar.d")',
           type: 'string',
         })
+        .option('file', {
+          describe: 'file for which you want to know the hash',
+          type: 'string',
+          alias: 'f',
+        })
         .option('host', {
-          default: '127.0.0.1',
-          describe: 'host',
+          default: 'localhost',
+          describe: 'host, often the subdomain hash',
           type: 'string',
           alias: 'h',
         })
         .option('ip', {
           default: '127.0.0.1',
-          describe: 'ip',
+          describe: 'IP address',
           type: 'string',
           alias: 'i',
         })

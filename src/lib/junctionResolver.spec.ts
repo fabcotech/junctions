@@ -52,18 +52,11 @@ describe('junction resolver', () => {
     const r = await resolveJunction([dummyResolver], 'foo.dummy & bar.dummy');
     expect(r.ok).to.be.true;
     if (r.ok) {
-      expect(r.result).to.deep.equals([
-        {
-          type: 'A',
-          name: 'foo.dummy & bar.dummy',
-          data: '127.0.0.1',
-        },
-        {
-          type: 'TXT',
-          name: 'foo.dummy & bar.dummy',
-          data: 'HASH=7316723eb8a77f3f7d8e241d29e55577f1e2bffbca9fc55251549c8f30506dc9',
-        },
-      ]);
+      expect(r.result).to.deep.equals({
+        ip: '127.0.0.1',
+        hostname: 'fc4216ff94414bd8.bar.dummy',
+        hash: '7316723eb8a77f3f7d8e241d29e55577f1e2bffbca9fc55251549c8f30506dc9',
+      });
     }
   });
   it("should fail if a domain can't be resolved", async () => {

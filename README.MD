@@ -40,35 +40,59 @@ PRIVATE_KEY=<your private key on bsc> npx hardhat run src/sol/scripts/deploy.ts 
 npx @fabcotech/junctions [command] [options]
 
 Commands :
-npx @fabcotech/junctions resolve <junction> Resolve junction [alias : r]
-npx @fabcotech/junctions dummyserver Start a dummy http server [alias : s]
-npx @fabcotech/junctions hashandconfig <junction> Generate junction records [alias : c]
 npx @fabcotech/junctions completion generate completion script
 
 Options :
---help Affiche l'aide [booléen]
---version Affiche le numéro de version [booléen]
-
+--help Displays help [booléen]
+--version Displays release number [booléen]
 ```
 
-### Commands
+#### Know hash and config
+
+Two hashes must be known to create a junction :
+
+- the subdomain hash, a 16 charaters long string that is unique for a given junction. For example hash of `"foo.d & bar.d"` is `"1dca7ed1f458746c"`.
+- the data hash, a full hash of the data (often a html page).
+
+This command outputs everything you need to know for setting up the junction. You can then update the records in dappy name system or any other name system.
+
+```
+# Get subdomain hash of a junction, and
+# data hash of ./examples/helloworld.html file
+
+npx @fabcotech/junctions hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
+
+# Get subdomain hash of another junction, and
+# data hash of myfile.html
+
+npx @fabcotech/junctions hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
+```
+
+#### Dummy server
+
+This script helps you ge things tested quickly. It runs a dev/local web server that serves a html file.
+
+```sh
+# Serve default ./example/helloworld.html on port 3001
+npx @fabcotech/junctions dummyserver
+
+# Serve ./example/aappleandaamazon.html on port 3001
+npx @fabcotech/junctions dummyserver --file "./examples/aapple&aamazon.html"
+```
+
+#### Resolve
 
 Resolve a junction in verbose mode
 
 ```sh
+# Check if foo.dummy and bar.dummy have configured the junction
 npx @fabcotech/junctions resolve 'foo.dummy & bar.dummy' -v
-```
 
-Dummy server that returns "Hello World !" on localhost:3001.
+# Check if apple.d and aamazon.d have configured the junction
+npx @fabcotech/junctions resolve 'apple.d & aamazon.d' -v
 
-```sh
-npx @fabcotech/junctions dummyserver
-```
-
-Get the hash, and what the records must be for a given endpoint.
-
-```sh
-npx @fabcotech/junctions hashandconfig 'foo.dummy & bar.dummy' --ip 127.0.0.1 --host "foo&bar" --port 3001
+# In addition, try to load the html file and check hash
+npx @fabcotech/junctions resolve 'apple.d & aamazon.d' --load -v
 ```
 
 ## Start dev

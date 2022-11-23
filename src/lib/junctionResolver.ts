@@ -22,8 +22,8 @@ export async function resolveDomain(
     console.log(
       `${domain} -> A: ${r.result[0].data}, TXT: ${r.result[1].data.slice(
         0,
-        16
-      )}`
+        22
+      )}...`
     );
   }
   return {
@@ -47,14 +47,6 @@ export async function resolveDomains(
   );
   const errors = results.filter((r) => !r.ok);
 
-  if (verbose) {
-    console.log(
-      `\n\x1b[32mResolution successful !\x1b[0m Resolved domains: ${
-        results.length - errors.length
-      }/${results.length}`
-    );
-  }
-
   if (containsErrors(results)) {
     if (verbose) {
     }
@@ -63,18 +55,18 @@ export async function resolveDomains(
       error: (errors as Err<JunctionError>[])[0].error,
     };
   }
+
+  if (verbose) {
+    console.log(
+      `\n\x1b[32mResolution successful !\x1b[0m Resolved domains: ${
+        results.length - errors.length
+      }/${results.length}`
+    );
+  }
+
   return {
     ok: true,
     result: results.map((r) => (r as Ok<JunctionRecords>).result),
-  };
-}
-
-export function validateResolvedDomains(
-  domains: JunctionRecords[]
-): Result<undefined, JunctionError> {
-  return {
-    ok: true,
-    result: undefined,
   };
 }
 
@@ -102,7 +94,9 @@ export async function resolveJunction(
   resolvers: DomainResolver[],
   junction: string,
   verbose: boolean = false
-): Promise<Result<JunctionRecords, JunctionError>> {
+): Promise<
+  Result<{ ip: string; hostname: string; hash: string }, JunctionError>
+> {
   if (verbose) {
     console.log(`Resolving junction \x1b[36m${junction}\x1b[0m \n`);
   }
@@ -142,13 +136,10 @@ export async function resolveJunction(
 
   return {
     ok: true,
-    result: [
-      {
-        type: 'A',
-        name: junction,
-        data: resolvedDomains.result[0][0].data,
-      },
-      { type: 'TXT', name: junction, data: resolvedDomains.result[0][1].data },
-    ],
+    result: {
+      ip: resolvedDomains.result[0][0].data,
+      hostname: domainResolverMap.result[0].domain,
+      hash: resolvedDomains.result[0][1].data.replace('HASH=', ''),
+    },
   };
 }
