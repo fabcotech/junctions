@@ -12,9 +12,9 @@ A new syntax in the address bar, and service discovery system that allows web se
 
 ## How to use it
 
-```
-# Resolve junction between dummy domains
+Resolve junction between dummy domains
 
+```
 npx @fabcotech/junctions resolve -v 'foo.dummy & bar.dummy'
 ```
 
