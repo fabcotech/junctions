@@ -1,5 +1,6 @@
 import { DomainResolver } from './domainResolvers';
 import { JunctionError, Result } from './types';
+import { blake2sHex } from 'blakejs';
 
 export const JUNCTION_SUB_DOMAIN = 'xn--7o8h';
 export const JUNCTION_OPERATOR = 'xn--dp8h';
@@ -15,19 +16,19 @@ export const getJunctionParts = (junction: string): string[] =>
       return 0;
     });
 
-export const getJunctionSubdomain = (junction: string): string =>
-  getJunctionParts(junction)
-    .map((p) => p.replace('.', JUNCTION_SUB_DOMAIN))
-    .join(JUNCTION_OPERATOR);
-
-export const getJunctionVisualName = (a: string): string => {
-  const withoutTld = a.split('.')[0];
-  const tld = a.split('.').slice(1).join('.');
-  return `"${withoutTld
-    .split(JUNCTION_SUB_DOMAIN)
-    .join('.')
-    .split(JUNCTION_OPERATOR)
-    .join(' & ')}".${tld}`;
+export const getJunctionSubdomain = (
+  junction: string,
+  verbose = false
+): string => {
+  const hash = blake2sHex(getJunctionParts(junction).join('&')).slice(0, 16);
+  if (verbose) {
+    console.log(
+      `\nHash of junction "${getJunctionParts(junction).join(
+        ' & '
+      )}" is ${hash}\n`
+    );
+  }
+  return hash;
 };
 
 export interface DomainResolverMap {
@@ -43,7 +44,8 @@ export interface DomainResolverMap {
 
 export function parse(
   resolvers: DomainResolver[],
-  junction: string
+  junction: string,
+  verbose = false
 ): Result<DomainResolverMap[], JunctionError> {
   const junctionParts = getJunctionParts(junction);
   if (junctionParts.length < 2) {
@@ -71,10 +73,11 @@ export function parse(
     };
   }
 
+  const hash = getJunctionSubdomain(junction, verbose);
   const domainResolverMap = junctionParts.map((part) => {
     const resolver = resolvers.find((r) => r.canResolve(part));
     return {
-      domain: `${getJunctionSubdomain(junction)}.${part}`,
+      domain: `${hash}.${part}`,
       zone: part,
       resolver,
     };

@@ -1,10 +1,5 @@
 import { expect } from 'chai';
-import {
-  getJunctionSubdomain,
-  JUNCTION_OPERATOR,
-  JUNCTION_SUB_DOMAIN,
-  parse,
-} from './parser';
+import { getJunctionSubdomain, parse } from './parser';
 import { dummyResolver } from './domainResolvers';
 
 describe('parser', () => {
@@ -59,12 +54,10 @@ describe('parser', () => {
       );
     }
   });
-  it('should replace . and & characters in junctions', () => {
+  it('should create 16 characters hash for junction', () => {
     const junction = 'foo.dummy & bar.dummy';
     const subdomain = getJunctionSubdomain(junction);
-    expect(subdomain).to.eql(
-      `bar${JUNCTION_SUB_DOMAIN}dummy${JUNCTION_OPERATOR}foo${JUNCTION_SUB_DOMAIN}dummy`
-    );
+    expect(subdomain).to.eql(`fc4216ff94414bd8`);
   });
   it('should return domain resolver map', () => {
     const resolvers = [dummyResolver];
@@ -73,12 +66,12 @@ describe('parser', () => {
     if (r.ok) {
       expect(r.result).to.deep.equals([
         {
-          domain: `${getJunctionSubdomain('bar.dummy & foo.dummy')}.bar.dummy`,
+          domain: `fc4216ff94414bd8.bar.dummy`,
           zone: 'bar.dummy',
           resolver: dummyResolver,
         },
         {
-          domain: `${getJunctionSubdomain('bar.dummy & foo.dummy')}.foo.dummy`,
+          domain: `fc4216ff94414bd8.foo.dummy`,
           zone: 'foo.dummy',
           resolver: dummyResolver,
         },

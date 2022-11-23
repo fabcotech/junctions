@@ -13,9 +13,9 @@ export const resolveJunction = async (argv: {
   if (r.ok) {
     ip = r.result[0].data;
     expectedHash = r.result[1].data.replace('HASH=', '');
-    console.log(`\nIP address of web service :\n${ip}\n`);
+    console.log(`\nIP address of web service (from A record) :\n${ip}\n`);
     console.log(
-      `Expected hash of the data (from name systems) :\n${expectedHash}\n`
+      `Expected hash of the data (from TXT record) :\n${expectedHash}\n`
     );
   }
 
