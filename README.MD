@@ -103,3 +103,16 @@ npm run start:server
 npm test
 npm test:types
 ```
+
+## Example files
+
+```
+11inch&ccurve&&uuniswap.html
+42e85a5c3638e8b45e30d022d513f20841adda36699cabe9cfd0b105c6424c0f
+
+aapple&aamazon.html
+adb4191dc2e52913a359dcc2c8aaaacd8f7f4b541f0d4380b7c72b2aa182d9bf
+
+ffrance&cchina&&iindia.html
+cd146eb5b32f1df04e702bd9c4eaecb79ecd02e224d03df78d7190ae4382e5f6
+```

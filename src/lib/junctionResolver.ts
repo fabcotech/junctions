@@ -20,9 +20,9 @@ export async function resolveDomain(
   }
   if (verbose) {
     console.log(
-      `${getJunctionVisualName(domain)} -> A: ${r.result[0].data}, TXT: ${
-        r.result[1].data
-      }`
+      `${getJunctionVisualName(domain)} -> A: ${
+        r.result[0].data
+      }, TXT: ${r.result[1].data.slice(0, 16)}`
     );
   }
   return {
@@ -49,9 +49,9 @@ export async function resolveDomains(
   if (verbose) {
     console.log();
     console.log(
-      `Successfully resolved domains: ${results.length - errors.length}/${
-        results.length
-      }`
+      `\x1b[32mResolution successful !\x1b[0m Resolved domains: ${
+        results.length - errors.length
+      }/${results.length}`
     );
   }
 
@@ -104,8 +104,7 @@ export async function resolveJunction(
   verbose: boolean = false
 ): Promise<Result<JunctionRecords, JunctionError>> {
   if (verbose) {
-    console.log('Resolving junction', junction);
-    console.log();
+    console.log(`Resolving junction \x1b[36m${junction}\x1b[0m \n`);
   }
 
   const domainResolverMap = parse(resolvers, junction);

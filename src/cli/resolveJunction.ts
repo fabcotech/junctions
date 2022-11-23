@@ -42,7 +42,7 @@ export const resolveJunction = async (argv: {
     return;
   }
 
-  console.log('Success ! Hashes match.');
+  console.log('\n\x1b[32mLoading of data successful !\x1b[0m Hashes match.');
   console.log('\ndata :\n');
   console.log((resultOfLoad as any).result.data);
   console.log('\ncontent-type :\n');
