@@ -24,22 +24,31 @@ Resolve and then load data (likely html file) and chec hash
 npx @fabcotech/junctions resolve -v --load 'foo.dummy & bar.dummy'
 ```
 
+## Deploy NameSystem on BSC using NodeReal and Hardhat
+
+```bash
+npm install
+PRIVATE_KEY=<your private key on bsc> npx hardhat run src/sol/scripts/deploy.ts --network bsctestnet
+```
+
 ## CLI
 
 ### Description
 
 ```
+
 npx @fabcotech/junctions [command] [options]
 
 Commands :
-  npx @fabcotech/junctions resolve <junction>        Resolve junction               [alias : r]
-  npx @fabcotech/junctions dummyserver               Start a dummy http server      [alias : s]
-  npx @fabcotech/junctions hashandconfig <junction>  Generate junction records      [alias : c]
-  npx @fabcotech/junctions completion                generate completion script
+npx @fabcotech/junctions resolve <junction> Resolve junction [alias : r]
+npx @fabcotech/junctions dummyserver Start a dummy http server [alias : s]
+npx @fabcotech/junctions hashandconfig <junction> Generate junction records [alias : c]
+npx @fabcotech/junctions completion generate completion script
 
 Options :
-  --help     Affiche l'aide                                            [booléen]
-  --version  Affiche le numéro de version                              [booléen]
+--help Affiche l'aide [booléen]
+--version Affiche le numéro de version [booléen]
+
 ```
 
 ### Commands
