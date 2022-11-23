@@ -1,5 +1,5 @@
 import { Err, JunctionError, JunctionRecords, Ok, Result } from './types';
-import { parse, DomainResolverMap } from './parser';
+import { parse, DomainResolverMap, getJunctionVisualName } from './parser';
 import { DomainResolver } from './domainResolvers';
 import isEqual from 'lodash.isequal';
 
@@ -20,7 +20,9 @@ export async function resolveDomain(
   }
   if (verbose) {
     console.log(
-      `${domain} -> A: ${r.result[0].data}, TXT: ${r.result[1].data}`
+      `${getJunctionVisualName(domain)} -> A: ${r.result[0].data}, TXT: ${
+        r.result[1].data
+      }`
     );
   }
   return {

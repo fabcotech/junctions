@@ -8,12 +8,27 @@ export const getJunctionParts = (junction: string): string[] =>
   junction
     .split('&')
     .map((part) => part.trim())
-    .filter((p) => p);
+    .filter((p) => p)
+    .sort((a, b) => {
+      if (a < b) return -1;
+      if (b < a) return 1;
+      return 0;
+    });
 
 export const getJunctionSubdomain = (junction: string): string =>
   getJunctionParts(junction)
     .map((p) => p.replace('.', JUNCTION_SUB_DOMAIN))
     .join(JUNCTION_OPERATOR);
+
+export const getJunctionVisualName = (a: string): string => {
+  const withoutTld = a.split('.')[0];
+  const tld = a.split('.').slice(1).join('.');
+  return `"${withoutTld
+    .split(JUNCTION_SUB_DOMAIN)
+    .join('.')
+    .split(JUNCTION_OPERATOR)
+    .join(' & ')}".${tld}`;
+};
 
 export interface DomainResolverMap {
   domain: string;
