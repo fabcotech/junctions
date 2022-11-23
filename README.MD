@@ -18,6 +18,12 @@ Resolve junction between dummy domains
 npx @fabcotech/junctions resolve -v 'foo.dummy & bar.dummy'
 ```
 
+Resolve and then load data (likely html file) and chec hash
+
+```
+npx @fabcotech/junctions resolve -v --load 'foo.dummy & bar.dummy'
+```
+
 ## CLI
 
 ### Description

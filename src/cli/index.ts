@@ -32,6 +32,12 @@ junction [command] [options]`
           default: false,
           type: 'boolean',
           describe: 'verbose output',
+        })
+        .option('load', {
+          alias: 'l',
+          default: false,
+          type: 'boolean',
+          describe: 'after resolve, load the website and check hash',
         });
     },
     handler: (argv) => {

@@ -14,7 +14,13 @@ export type NameRecord = RecordA | RecordTXT;
 
 export type JunctionRecords = [RecordA, RecordTXT];
 
+export type LoadResult = {
+  'Content-Type': string;
+  data: string;
+};
+
 export type JunctionErrorCode =
+  | 'HASHES_DONT_MATCH'
   | 'RESOLVER_NOT_FOUND'
   | 'RESOLVER_ERROR'
   | 'RESOLVER_ERROR_A_RECORD_NOT_FOUND'

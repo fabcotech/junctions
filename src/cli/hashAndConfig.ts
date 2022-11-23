@@ -1,52 +1,6 @@
-import http, { IncomingHttpHeaders } from 'http';
 import { blake2sHex } from 'blakejs';
 import { getJunctionSubdomain } from '../lib/parser';
-
-interface HttpResponse {
-  data: string;
-  headers: IncomingHttpHeaders;
-}
-
-const httpRequest = async (
-  ip: string,
-  host: string,
-  port = 3001
-): Promise<HttpResponse> => {
-  const options = {
-    host: ip,
-    method: 'GET',
-    port,
-    path: `/`,
-    headers: {
-      Host: host,
-    },
-  };
-
-  const data = await new Promise<HttpResponse>((resolve, reject) => {
-    const req = http.request(options, (resp) => {
-      if (resp.statusCode !== 200) {
-        reject(`Status code is not 200 : ${resp.statusCode}`);
-        return;
-      }
-      let data = '';
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
-      resp.on('end', () => {
-        resolve({
-          headers: resp.headers,
-          data: data,
-        });
-      });
-      resp.on('error', (err) => {
-        reject(err);
-      });
-    });
-    req.end();
-  });
-
-  return data;
-};
+import { httpRequest } from '../lib';
 
 export const hashAndConfig = async ({
   junction,

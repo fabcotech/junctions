@@ -5,6 +5,8 @@ import {
   dummyResolver,
 } from './domainResolvers';
 
+export * from './loader';
+
 export async function resolve(junction: string, verbose: boolean = false) {
   const resolvers = [dummyResolver, dappyGammaResolver, dappyDResolver];
   return resolveJunction(resolvers, junction, verbose);
