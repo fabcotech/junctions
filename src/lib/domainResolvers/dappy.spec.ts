@@ -92,7 +92,7 @@ describe('dappy resolver', () => {
             answers: [
               {
                 type: 'TXT',
-                data: 'HASH=abcdef',
+                data: 'HASH=7316723eb8a77f3f7d8e241d29e55577f1e2bffbca9fc55251549c8f30506dc9',
               },
             ],
           }),
@@ -113,7 +113,7 @@ describe('dappy resolver', () => {
         {
           type: 'TXT',
           name: 'test.gamma',
-          data: 'HASH=abcdef',
+          data: 'HASH=7316723eb8a77f3f7d8e241d29e55577f1e2bffbca9fc55251549c8f30506dc9',
         },
       ]);
     }

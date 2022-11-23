@@ -24,7 +24,9 @@ const successResolver = ({
         {
           type: 'TXT',
           name: domain,
-          data: hash || 'HASH=abcdef',
+          data:
+            hash ||
+            'HASH=7316723eb8a77f3f7d8e241d29e55577f1e2bffbca9fc55251549c8f30506dc9',
         },
       ],
     });
@@ -59,7 +61,7 @@ describe('junction resolver', () => {
         {
           type: 'TXT',
           name: 'foo.dummy & bar.dummy',
-          data: 'HASH=abcdef',
+          data: 'HASH=7316723eb8a77f3f7d8e241d29e55577f1e2bffbca9fc55251549c8f30506dc9',
         },
       ]);
     }
