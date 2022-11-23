@@ -10,10 +10,12 @@ A new syntax in the address bar, and service discovery system that allows web se
 - [dummy](./src/lib/domainResolvers/dummy.ts):
   - `.dummy` domain names: For test purposes, always resolve to [RecordA: 127.0.0.1, RecordTXT: HASH=abcdef]
 
-## How to install
+## How to use it
 
 ```
-npm i -g @fabcotech/junctions
+# Resolve junction between dummy domains
+
+npx @fabcotech/junctions resolve -v 'foo.dummy & bar.dummy'
 ```
 
 ## CLI
@@ -21,13 +23,13 @@ npm i -g @fabcotech/junctions
 ### Description
 
 ```
-junction [command] [options]
+npx @fabcotech/junctions [command] [options]
 
 Commands :
-  junctions resolve <junction>        Resolve junction               [alias : r]
-  junctions dummyserver               Start a dummy http server      [alias : s]
-  junctions hashandconfig <junction>  Generate junction records      [alias : c]
-  junctions completion                generate completion script
+  npx @fabcotech/junctions resolve <junction>        Resolve junction               [alias : r]
+  npx @fabcotech/junctions dummyserver               Start a dummy http server      [alias : s]
+  npx @fabcotech/junctions hashandconfig <junction>  Generate junction records      [alias : c]
+  npx @fabcotech/junctions completion                generate completion script
 
 Options :
   --help     Affiche l'aide                                            [booléen]
@@ -39,19 +41,19 @@ Options :
 Resolve a junction in verbose mode
 
 ```sh
-junctions resolve 'foo.dummy & bar.dummy' -v
+npx @fabcotech/junctions resolve 'foo.dummy & bar.dummy' -v
 ```
 
 Dummy server that returns "Hello World !" on localhost:3001.
 
 ```sh
-junctions dummyserver
+npx @fabcotech/junctions dummyserver
 ```
 
 Get the hash, and what the records must be for a given endpoint.
 
 ```sh
-junctions hashandconfig 'foo.dummy & bar.dummy' --ip 127.0.0.1 --host "foo&bar" --port 3001
+npx @fabcotech/junctions hashandconfig 'foo.dummy & bar.dummy' --ip 127.0.0.1 --host "foo&bar" --port 3001
 ```
 
 ## Start dev
