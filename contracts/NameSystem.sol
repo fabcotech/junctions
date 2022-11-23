@@ -9,6 +9,7 @@ contract NameSystem is ERC721 {
 
     // Mapping from token ID to owner address
     mapping(string => address) private _domains;
+    mapping(string => string) private _records;
 
     constructor(
         string memory _name,
@@ -35,12 +36,17 @@ contract NameSystem is ERC721 {
      * @dev Mints a token to an address with a tokenURI.
      * @param _to address of the future owner of the token
      */
-    function mintTo(address _to, string memory domain) public {
-        require(_domains[domain] == address(0), "Domain already exists");
+    function mintTo(address _to, string memory domain, string memory zone) public {
+        require(_domains[domain] == address(0), "domain already exists");
         uint256 newTokenId = _getNextTokenId();
         _mint(_to, newTokenId);
         _incrementTokenId();
         _domains[domain] = _to;
+        _records[domain] = zone;
     }
 
+    function getRecords(string memory domain) public view returns(string memory) {
+        require(_domains[domain] != address(0), "domain does not exist");
+        return _records[domain];
+    }
 }

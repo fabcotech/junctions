@@ -32,8 +32,9 @@ export interface NameSystemInterface extends utils.Interface {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getRecords(string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mintTo(address,string)": FunctionFragment;
+    "mintTo(address,string,string)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
@@ -50,6 +51,7 @@ export interface NameSystemInterface extends utils.Interface {
       | "approve"
       | "balanceOf"
       | "getApproved"
+      | "getRecords"
       | "isApprovedForAll"
       | "mintTo"
       | "name"
@@ -76,12 +78,20 @@ export interface NameSystemInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "getRecords",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "mintTo",
-    values: [PromiseOrValue<string>, PromiseOrValue<string>]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
@@ -133,6 +143,7 @@ export interface NameSystemInterface extends utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getRecords", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -253,6 +264,11 @@ export interface NameSystem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getRecords(
+      domain: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -262,6 +278,7 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
+      zone: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -329,6 +346,11 @@ export interface NameSystem extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getRecords(
+    domain: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   isApprovedForAll(
     owner: PromiseOrValue<string>,
     operator: PromiseOrValue<string>,
@@ -338,6 +360,7 @@ export interface NameSystem extends BaseContract {
   mintTo(
     _to: PromiseOrValue<string>,
     domain: PromiseOrValue<string>,
+    zone: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -405,6 +428,11 @@ export interface NameSystem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    getRecords(
+      domain: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -414,6 +442,7 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
+      zone: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -517,6 +546,11 @@ export interface NameSystem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getRecords(
+      domain: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -526,6 +560,7 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
+      zone: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -594,6 +629,11 @@ export interface NameSystem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getRecords(
+      domain: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -603,6 +643,7 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
+      zone: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
