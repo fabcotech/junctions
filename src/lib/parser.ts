@@ -2,9 +2,6 @@ import { DomainResolver } from './domainResolvers';
 import { JunctionError, Result } from './types';
 import { blake2sHex } from 'blakejs';
 
-export const JUNCTION_SUB_DOMAIN = 'xn--7o8h';
-export const JUNCTION_OPERATOR = 'xn--dp8h';
-
 export const getJunctionParts = (junction: string): string[] =>
   junction
     .split('&')
