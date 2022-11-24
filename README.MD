@@ -2,9 +2,11 @@
 
 A radically new and simple way to address content that need multiparty endorsement or validation, without intermediary.
 
+You want to check the [4 minutes video with slides](https://youtube.com) (Facility / Tutorial not included in video), or just read the text.
+
 ### Problem
 
-Every naming system in the digital world like DNS, or even blockchain name systems ENS or Unstoppable Domains work with unique targets, for example you visit _apple.com_, _uniswap.org_ or _apple.com_.
+Every naming system in the digital world like DNS, or even blockchain name systems ENS or Unstoppable Domains points to unique targets, for example you visit _apple.com_, _uniswap.org_ or _us.gov_.
 
 Let's say Apple and Amazon want to run a special communication or campaign together, they want to mutually endorse or assert a file or even an entire front-end application, how are they supposed to do it ? And how can users easily and without trusted intermediaries know about this campaign and who endorses it ?
 
