@@ -174,11 +174,11 @@ We'll use BNB Chain (testnet) and NodeReal provider to register our domain on th
 This steps simulates what a browser would do before displaying a HTML to the user. It is the most critical step. Under the hood it will :
 
 - Parse the junction : `bob.bsc & alice.bsc -> ["bob.bsc", "alice.bsc]`.
-- Fetching the records for each domain
-- Making sure they match
-- Finally loading the file with HTTP
-- Checking hash of the file
-- Displaying HTML in the browser, or in the output
+- Fetch the records for each domain
+- Make sure they match
+- Load the file with HTTP (insecure)
+- Check hash of the file
+- Display HTML in the browser, or in the command line
 
 ```
 # Run the dummy server that will serve your HTML
