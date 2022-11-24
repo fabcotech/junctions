@@ -40,6 +40,12 @@ junction [command] [options]`
           default: false,
           type: 'boolean',
           describe: 'after resolve, load the website and check hash',
+        })
+        .option('open', {
+          alias: 'o',
+          default: false,
+          type: 'boolean',
+          describe: 'open file in browser',
         });
     },
     handler: (argv) => {

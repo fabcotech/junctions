@@ -45,9 +45,9 @@ Then the browser, or whichever program wants to load a file through a junction a
 
 For example `"amazon.bns & apple.bns"` hash is `6c1eb916b6a37488`, the browser will try to find two records for addresses `6c1eb916b6a37488.amazon.bns` and `6c1eb916b6a37488.apple.bns`.
 
-We stick to conventions of the DNS, the browser will try to find a TXT record that contains the hash of the content, and a A record that contain the IP address from which the content will be loaded. **If all members of the junction have configured the same subdomain, and exactly the same records**, then content is loaded and checked against the hash.
+We stick to conventions of the DNS, the browser will try to find a TXT record that contains the hash of the content, and a A record that contain the IP address from which the content will be loaded. **If all members of the junction have configured exactly the same records**, then content is loaded and checked against the hash.
 
-Our examples, and the following tutorial works with two identities, junctions can scale to infinity, **20 companies can co-endorse a front-end application**.
+Our examples, and the following tutorial works with two identities, junctions can scale to infinity, **20 companies can co-endorse a front-end application**. We can speculate that in some areas like web3, DeFi or critical B2B web portals distribution through junction can even become a mandatory feature for web apps to be trusted.
 
 ### Facility
 
@@ -116,10 +116,10 @@ Just resolve the junction, and see of all members match
 npm run cli -- resolve "bob.bns & alice.bns" --verbose
 ```
 
-Resolution + check of the HTML file + display on screen
+Resolution + check of the HTML file + display on screen + open file in browser
 
 ```sh
-npm run cli -- resolve "bob.bns & alice.bns" --verbose --load
+npm run cli -- resolve "bob.bns & alice.bns" --verbose --load --open
 ```
 
 You should see two "Successful" green logs, and see the HTML file printed on screen. It means that the data/file has been resolved, and the two members of the junction mutually endorse/attest it.

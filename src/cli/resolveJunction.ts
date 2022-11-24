@@ -1,11 +1,14 @@
+import { exec } from 'child_process';
+import fs from 'fs';
 import { resolve, loader } from '../lib';
 
 export const resolveJunction = async (argv: {
   junction: string;
   verbose: boolean;
   load: boolean;
+  open: boolean;
 }) => {
-  const { junction, verbose, load } = argv;
+  const { junction, verbose, load, open } = argv;
   const r = await resolve(junction, verbose);
 
   if (r.ok) {
@@ -55,4 +58,20 @@ export const resolveJunction = async (argv: {
   console.log((resultOfLoad as any).result.data.slice(0, 800));
   console.log('\ncontent-type :');
   console.log((resultOfLoad as any).result['Content-Type']);
+
+  if (!open) {
+    return;
+  }
+
+  fs.writeFileSync('file.html', (resultOfLoad as any).result.data, 'utf8');
+  exec(
+    'open file.html',
+    { maxBuffer: 1024 * 1000 * 4 },
+    function (error, stdout, stderr) {
+      if (error) {
+        console.log(error);
+        throw new Error('Error openning browser');
+      }
+    }
+  );
 };
