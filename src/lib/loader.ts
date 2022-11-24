@@ -59,7 +59,7 @@ export async function loader(
     console.log(`Expected data hash : ${expectedHash}`);
     console.log(`Loading ${ip}:${port} @ hostname:${hostname}`);
   }
-  const result = await httpRequest(ip as string, hostname);
+  const result = await httpRequest(ip as string, hostname, port);
   const dataHash = blake2sHex(result.data);
   if (verbose) {
     console.log(`Actual data hash   : ${dataHash}`);

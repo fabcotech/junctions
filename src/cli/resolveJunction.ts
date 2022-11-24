@@ -26,12 +26,18 @@ export const resolveJunction = async (argv: {
 
   if (verbose) {
     console.log('Now loading the data and checking the hashes');
+    if (['localhost', '127.0.0.1'].includes(r.result.ip)) {
+      console.log('IP is local, will use port 3001 by default');
+    } else {
+      console.log('IP is remote, will use port 80 by default');
+    }
   }
   const resultOfLoad = await loader(
     r.result.hash,
     r.result.ip,
     r.result.hostname,
-    verbose
+    verbose,
+    ['localhost', '127.0.0.1'].includes(r.result.ip) ? 3001 : 80
   );
   if (!resultOfLoad.ok) {
     console.log(

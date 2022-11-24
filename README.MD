@@ -2,6 +2,14 @@
 
 A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.
 
+Resolve some junctions for fun
+
+```
+npx junctions resolve "aapple.d & aamazon.d" -v -l
+npx junctions resolve "uuniswap.d & ccurve.d & iinch.d" -v -l
+npx junctions resolve "cchina.d & iindia.d & ffrance.d" -v -l
+```
+
 ## Available resolvers
 
 - [dappy](./src/lib/domainResolvers/dappy.ts):
