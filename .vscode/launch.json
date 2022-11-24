@@ -18,6 +18,38 @@
       ]
     },
     {
+      "name": "CLI setbnbrecords",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": [
+        "${workspaceRoot}/src/cli/index.ts",
+        "setbnbrecords",
+        "b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213",
+        "foo.bsn"
+      ]
+    },
+    {
+      "name": "CLI resolve",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": [
+        "${workspaceRoot}/src/cli/index.ts",
+        "resolve",
+        "foo.bsn & foo.bsn",
+        "-v"
+      ]
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Mocha Tests",

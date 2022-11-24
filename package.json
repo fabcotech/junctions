@@ -23,7 +23,7 @@
     "test:sol": "hardhat test",
     "build:sol": "hardhat compile",
     "clean:all": "rm -rf dist",
-    "copy:abi": "cp artifacts/contracts/NameSystem.sol/NameSystem.json dist/",
+    "copy:abi": "cp artifacts/contracts/NameSystem.sol/NameSystem.json src/lib/domainResolvers/",
     "build:all": "npm run clean:all && npm run build:ts && npm run build:sol && npm run copy:abi",
     "deploy:sol:bnb:testnet": "hardhat run --network bnbtestnet scripts/deploy.ts",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'src/**/*.spec.ts'",

@@ -13,10 +13,6 @@ export const setRecordsOnBNB = async ({
   domain: string;
   filePath: string;
 }) => {
-  const {
-    abi,
-  } = require('../../artifacts/contracts/NameSystem.sol/NameSystem.json');
-
   const { config } = bnbResolver;
   if (!config) {
     return;
@@ -24,7 +20,11 @@ export const setRecordsOnBNB = async ({
 
   const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
   const wallet = new ethers.Wallet(privateKey, provider);
-  const contract = new ethers.Contract(config.contractAddress, abi, wallet);
+  const contract = new ethers.Contract(
+    config.contractAddress,
+    config.abi,
+    wallet
+  );
   const records = fs.readFileSync(filePath, 'utf8');
 
   console.log('Setting records on Binance Smart Chain Testnet...');
