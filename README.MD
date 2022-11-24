@@ -57,6 +57,7 @@ The tuto written for hackaton examination consists in :
 git clone https://github.com/fabcotech/junctions.git
 cd junctions
 npm i
+npm run build:all
 ```
 
 #### (1) Setting up junction and hashes
