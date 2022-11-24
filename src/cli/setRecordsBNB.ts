@@ -18,6 +18,10 @@ export const setRecordsOnBNB = async ({
     return;
   }
 
+  if (!domain.endsWith('.bns')) {
+    console.log('Domain must end with .bns');
+  }
+
   const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
   const wallet = new ethers.Wallet(privateKey, provider);
   const contract = new ethers.Contract(

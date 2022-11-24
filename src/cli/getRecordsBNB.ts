@@ -7,9 +7,9 @@ export const getRecordsOnBNB = async ({
   privateKey: string;
   domain: string;
 }) => {
-  const {
-    abi,
-  } = require('../../artifacts/contracts/NameSystem.sol/NameSystem.json');
+  if (!domain.endsWith('.bns')) {
+    console.log('Domain must end with .bns');
+  }
 
   const { config } = bnbResolver;
   if (!config) {
@@ -17,7 +17,11 @@ export const getRecordsOnBNB = async ({
   }
 
   const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
-  const contract = new ethers.Contract(config.contractAddress, abi, provider);
+  const contract = new ethers.Contract(
+    config.contractAddress,
+    config.abi,
+    provider
+  );
 
   const records = await contract.getRecords(domain);
 
