@@ -1,4 +1,6 @@
-# Junctions
+# Junctions, by dappy team
+
+**Track: Security**
 
 A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.
 
@@ -23,13 +25,13 @@ npx junctions resolve "cchina.d & iindia.d & ffrance.d" -v -l
 Resolve junction between dummy domains
 
 ```
-npx @fabcotech/junctions resolve -v 'foo.dummy & bar.dummy'
+npx junctions resolve -v 'foo.dummy & bar.dummy'
 ```
 
 Resolve and then load data (likely html file) and chec hash
 
 ```
-npx @fabcotech/junctions resolve -v --load 'foo.dummy & bar.dummy'
+npx junctions resolve -v --load 'foo.dummy & bar.dummy'
 ```
 
 ## Deploy NameSystem on BNB chain using NodeReal and Hardhat
@@ -45,10 +47,10 @@ PRIVATE_KEY=<your private key on bnb chain> npx hardhat run scripts/deploy.ts --
 
 ```
 
-npx @fabcotech/junctions [command] [options]
+npx junctions [command] [options]
 
 Commands :
-npx @fabcotech/junctions completion generate completion script
+npx junctions completion generate completion script
 
 Options :
 --help Displays help [booléen]
@@ -68,12 +70,12 @@ This command outputs everything you need to know for setting up the junction. Yo
 # Get subdomain hash of a junction, and
 # data hash of ./examples/helloworld.html file
 
-npx @fabcotech/junctions hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
+npx junctions hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
 
 # Get subdomain hash of another junction, and
 # data hash of myfile.html
 
-npx @fabcotech/junctions hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
+npx junctions hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
 ```
 
 #### Dummy server
@@ -82,10 +84,10 @@ This script helps you ge things tested quickly. It runs a dev/local web server t
 
 ```sh
 # Serve default ./example/helloworld.html on port 3001
-npx @fabcotech/junctions dummyserver
+npx junctions dummyserver
 
 # Serve ./example/aappleandaamazon.html on port 3001
-npx @fabcotech/junctions dummyserver --file "./examples/aappleandaamazon.html"
+npx junctions dummyserver --file "./examples/aappleandaamazon.html"
 ```
 
 #### Resolve
@@ -94,13 +96,13 @@ Resolve a junction in verbose mode
 
 ```sh
 # Check if foo.dummy and bar.dummy have configured the junction
-npx @fabcotech/junctions resolve 'foo.dummy & bar.dummy' -v
+npx junctions resolve 'foo.dummy & bar.dummy' -v
 
 # Check if apple.d and aamazon.d have configured the junction
-npx @fabcotech/junctions resolve 'apple.d & aamazon.d' -v
+npx junctions resolve 'apple.d & aamazon.d' -v
 
 # In addition, try to load the html file and check hash
-npx @fabcotech/junctions resolve 'apple.d & aamazon.d' --load -v
+npx junctions resolve 'apple.d & aamazon.d' --load -v
 ```
 
 ## Start dev
@@ -158,14 +160,18 @@ The tuto written for hackaton examination consists in :
 - (2) Registering two domains to simulate two parties registering a junction.
 - (3) Resolution and check that everything works.
 
+```
+git clone https://github.com/fabcotech/junctions.git
+cd junctions
+npm i
+```
+
 #### (1) Setting up junction and hashes
 
 Pick up two domains that you want (ex: `bob.bsc` and `alice.bsc`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
 
 ```
-npm i
-
-npx @fabcotech/junctions hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
+npx junctions hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
 ```
 
 You can see that a subdomain hash is displayed, it is unique for your junction. A data hash has also been created, and the two records (`records.json`) that need to be registered alongside both domains.
@@ -195,8 +201,12 @@ This steps simulates what a browser would do before displaying a HTML to the use
 dummyserver --file ./examples/helloworld.html
 
 # Only resolution
-npx @fabcotech/junctions resolve "bob.bsc & alice.bsc" --verbose
+npx junctions resolve "bob.bsc & alice.bsc" --verbose
 
 # Resolution + check of the HTML file + display on screen
-npx @fabcotech/junctions resolve "bob.bsc & alice.bsc" --verbose --load
+npx junctions resolve "bob.bsc & alice.bsc" --verbose --load
 ```
+
+You should see two "Successful" green logs, and see the HTML file printed on screen. It means that the data/file has been resolved, and the two members of the junction mutually endorse/attest it.
+
+Congratulations !
