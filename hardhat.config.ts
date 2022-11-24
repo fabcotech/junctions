@@ -10,7 +10,9 @@ const config: HardhatUserConfig = {
     },
     bnbtestnet: {
       url: 'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',
-      accounts: [process.env.PRIVATE_KEY || ''],
+      accounts: [
+        process.env.PRIVATE_KEY || '0x0000000000000000000000000000000000000000',
+      ],
     },
   },
 };
