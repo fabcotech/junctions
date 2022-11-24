@@ -88,25 +88,31 @@ This steps simulates what a browser would do before displaying a HTML to the use
 - Check hash of the file
 - Display HTML in the browser, or in the command line
 
-To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wallet private key will be needed and referenced as <PRIVATE_KEY> in script below. You can use this [faucet](https://testnet.bnbchain.org/faucet-smart) to get some BNB.
+To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wallet private key will be needed and referenced as `<PRIVATE_KEY>` in script below. You can use this [faucet](https://testnet.bnbchain.org/faucet-smart) to get some BNB.
 
-```
-# Run the dummy server that will serve your HTML
-# file on port 3001 (default)
+Run the dummy server that will serve your HTML
+file on port 3001 (default)
+
+```sh
 npm run cli -- dummyserver --file ./examples/helloworld.html
+```
 
-# Push records on BNB Testnet chain
+Push records on BNB Testnet chain
+
+```sh
 npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bsc --verbose
 npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bsc --verbose
+```
 
+Only resolution
 
-npm run cli -- setbnbrecords b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213 bob.bsc --verbose
-npm run cli -- setbnbrecords b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213 alice.bsc --verbose
-
-# Only resolution
+```sh
 npm run cli -- resolve "bob.bsc & alice.bsc" --verbose
+```
 
-# Resolution + check of the HTML file + display on screen
+Resolution + check of the HTML file + display on screen
+
+```sh
 npm run cli -- resolve "bob.bsc & alice.bsc" --verbose --load
 ```
 
@@ -119,3 +125,7 @@ Congratulations !
 I'm Raph, lead dev of dappy project, we're a team passionate about security of web services, web3 and decentralized technologies. The last two years we've created a unique name system and webPKI technology that aim at addressing industry-wide security and privacy issues and limitations of current protocols. Junctions is an additional innovation above what we've already built.
 
 The dev team is composed of myself and Paul Musso (dappy team).
+
+```
+
+```
