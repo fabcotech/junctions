@@ -24,11 +24,11 @@ Resolve and then load data (likely html file) and chec hash
 npx @fabcotech/junctions resolve -v --load 'foo.dummy & bar.dummy'
 ```
 
-## Deploy NameSystem on BSC using NodeReal and Hardhat
+## Deploy NameSystem on BNB chain using NodeReal and Hardhat
 
 ```bash
 npm install
-PRIVATE_KEY=<your private key on bsc> npx hardhat run src/sol/scripts/deploy.ts --network bsctestnet
+PRIVATE_KEY=<your private key on bnb chain> npx hardhat run src/sol/scripts/deploy.ts --network bnbtestnet
 ```
 
 ## CLI
@@ -98,7 +98,7 @@ npx @fabcotech/junctions resolve 'apple.d & aamazon.d' --load -v
 ## Start dev
 
 ```sh
-npm run build & npm start
+npm run build:all & npm start
 ```
 
 or
@@ -106,6 +106,7 @@ or
 In a dedicated terminal
 
 ```sh
+npm run build:all
 npm run build:watch
 ```
 

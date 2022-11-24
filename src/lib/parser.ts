@@ -30,6 +30,7 @@ export const getJunctionSubdomain = (
 
 export interface DomainResolverMap {
   domain: string;
+  zone: string;
   resolver: DomainResolver;
 }
 

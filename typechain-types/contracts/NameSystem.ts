@@ -34,12 +34,13 @@ export interface NameSystemInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "getRecords(string)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mintTo(address,string,string)": FunctionFragment;
+    "mintTo(address,string)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
+    "setRecords(string,string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
@@ -59,6 +60,7 @@ export interface NameSystemInterface extends utils.Interface {
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
+      | "setRecords"
       | "supportsInterface"
       | "symbol"
       | "tokenURI"
@@ -87,11 +89,7 @@ export interface NameSystemInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mintTo",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>
-    ]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
@@ -118,6 +116,10 @@ export interface NameSystemInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setRecords",
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -163,6 +165,7 @@ export interface NameSystemInterface extends utils.Interface {
     functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setRecords", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -278,7 +281,6 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
-      zone: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -307,6 +309,12 @@ export interface NameSystem extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setRecords(
+      domain: PromiseOrValue<string>,
+      record: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -360,7 +368,6 @@ export interface NameSystem extends BaseContract {
   mintTo(
     _to: PromiseOrValue<string>,
     domain: PromiseOrValue<string>,
-    zone: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -389,6 +396,12 @@ export interface NameSystem extends BaseContract {
   setApprovalForAll(
     operator: PromiseOrValue<string>,
     approved: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setRecords(
+    domain: PromiseOrValue<string>,
+    record: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -442,7 +455,6 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
-      zone: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -471,6 +483,12 @@ export interface NameSystem extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setRecords(
+      domain: PromiseOrValue<string>,
+      record: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -560,7 +578,6 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
-      zone: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -589,6 +606,12 @@ export interface NameSystem extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setRecords(
+      domain: PromiseOrValue<string>,
+      record: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -643,7 +666,6 @@ export interface NameSystem extends BaseContract {
     mintTo(
       _to: PromiseOrValue<string>,
       domain: PromiseOrValue<string>,
-      zone: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -672,6 +694,12 @@ export interface NameSystem extends BaseContract {
     setApprovalForAll(
       operator: PromiseOrValue<string>,
       approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setRecords(
+      domain: PromiseOrValue<string>,
+      record: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

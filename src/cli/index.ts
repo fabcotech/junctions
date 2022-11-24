@@ -107,6 +107,11 @@ junction [command] [options]`
           describe: 'port',
           type: 'number',
           alias: 'p',
+        })
+        .option('pushOnBNB', {
+          default: false,
+          type: 'boolean',
+          describe: 'push zone on BNC Chain',
         });
     },
     handler(argv) {

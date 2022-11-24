@@ -1,6 +1,7 @@
-import { expect } from 'chai';
+import { expect, util } from 'chai';
 import { ethers } from 'hardhat';
 import type { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signer-with-address';
+import { NameSystem__factory } from '../typechain-types';
 
 const fakeZoneRecords = JSON.stringify([
   {
@@ -16,15 +17,16 @@ const fakeZoneRecords = JSON.stringify([
 ]);
 
 describe('NameSystem contract', function () {
-  let NameSystem;
+  let NameSystem: NameSystem__factory;
   let contract;
   let _name = 'NameSystem';
   let _symbol = 'Dappy';
   let owner: SignerWithAddress;
+  let otherUser: SignerWithAddress;
 
   beforeEach(async function () {
     NameSystem = await ethers.getContractFactory('NameSystem');
-    [owner] = await ethers.getSigners();
+    [owner, otherUser] = await ethers.getSigners();
 
     contract = await NameSystem.deploy(_name, _symbol);
   });
@@ -36,22 +38,33 @@ describe('NameSystem contract', function () {
     });
 
     it('Should mint a domain', async () => {
-      await contract.mintTo(owner.address, 'foo.bsn', fakeZoneRecords);
+      await contract.mintTo(owner.address, 'foo.bsn');
       expect(await contract.ownerOf(1)).to.equal(owner.address);
     });
 
     it('Should not mint a domain already taken', async () => {
-      await contract.mintTo(owner.address, 'foo.bsn', fakeZoneRecords);
+      await contract.mintTo(owner.address, 'foo.bsn');
       expect(await contract.ownerOf(1)).to.equal(owner.address);
 
       await expect(
-        contract.mintTo(owner.address, 'foo.bsn', fakeZoneRecords)
+        contract.mintTo(owner.address, 'foo.bsn')
       ).to.be.revertedWith('domain already exists');
     });
 
+    it('domain owner should set records', async () => {
+      await contract.mintTo(owner.address, 'foo.bsn');
+      await contract.setRecords('foo.bsn', fakeZoneRecords);
+      expect(await contract.getRecords('foo.bsn')).to.equal(fakeZoneRecords);
+
+      await expect(
+        contract.connect(otherUser).setRecords('foo.bsn', fakeZoneRecords)
+      ).to.be.revertedWith('Not owner of this domain');
+    });
+
     it('Should get records', async () => {
-      await contract.mintTo(owner.address, 'foo.bsn', fakeZoneRecords);
+      await contract.mintTo(owner.address, 'foo.bsn');
       expect(await contract.ownerOf(1)).to.equal(owner.address);
+      await contract.setRecords('foo.bsn', fakeZoneRecords);
 
       const records = await contract.getRecords('foo.bsn');
       expect(records).to.equal(fakeZoneRecords);
