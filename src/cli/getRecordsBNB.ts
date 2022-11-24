@@ -17,7 +17,12 @@ export const getRecordsOnBNB = async ({
     return;
   }
 
-  const records = JSON.parse(await getRawRecordsUsingStarton(domain));
+  const rawRecords = await getRawRecordsUsingStarton(domain);
+  if (!rawRecords) {
+    console.log(`No records found for ${domain}`);
+    process.exit(1);
+  }
+  const records = JSON.parse(rawRecords);
   console.log(`${domain} records from Binance Smart Chain Testnet:`);
   console.log();
   console.log(JSON.stringify(records, null, 2));

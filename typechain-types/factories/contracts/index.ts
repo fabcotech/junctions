@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { NameSystem__factory } from "./NameSystem__factory";
+export { StartonERC721__factory } from "./StartonERC721__factory";

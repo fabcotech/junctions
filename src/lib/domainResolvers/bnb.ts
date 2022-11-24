@@ -3,7 +3,7 @@ import NameSystem from './NameSystem.json';
 import { postRequest } from '../utils';
 
 const config = {
-  contractAddress: '0xb7249d9F66DD9470C26b02fAB8f519F18971CEb6',
+  contractAddress: '0x17Bb5F364E261fB1978B7f2FdF5a1E9447F132f7',
   abi: NameSystem.abi,
   providerUrl:
     'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',

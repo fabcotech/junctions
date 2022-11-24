@@ -43,7 +43,7 @@
   "homepage": "https://github.com/fabcotech/junctions#readme",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
-    "@openzeppelin/contracts": "^4.8.0",
+    "@openzeppelin/contracts": "~4.6.0",
     "@types/chai": "^4.3.4",
     "@types/figlet": "^1.5.5",
     "@types/lodash.isequal": "^4.5.6",

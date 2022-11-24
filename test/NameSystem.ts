@@ -28,7 +28,7 @@ describe('NameSystem contract', function () {
     NameSystem = await ethers.getContractFactory('NameSystem');
     [owner, otherUser] = await ethers.getSigners();
 
-    contract = await NameSystem.deploy(_name, _symbol);
+    contract = await NameSystem.deploy(_name, _symbol, owner.address);
   });
 
   describe('Deployment', () => {

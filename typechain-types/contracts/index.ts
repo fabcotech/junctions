@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { NameSystem } from "./NameSystem";
+export type { StartonERC721 } from "./StartonERC721";

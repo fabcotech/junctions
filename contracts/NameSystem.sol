@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./StartonERC721.sol";
 
 // A simple smart contract
-contract NameSystem is ERC721 {
+contract NameSystem is StartonERC721 {
     uint256 private _currentTokenId = 0;//Token ID here will start from 1
 
     // Mapping from token ID to owner address
@@ -13,8 +13,9 @@ contract NameSystem is ERC721 {
 
     constructor(
         string memory _name,
-        string memory _symbol
-    ) ERC721(_name, _symbol) {
+        string memory _symbol,
+        address _owner
+    ) StartonERC721(_name, _symbol, "", "", _owner) {
     }
 
     /**
