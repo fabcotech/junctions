@@ -22,7 +22,7 @@ const bnbResolver: DomainResolver = {
     return domain.endsWith('.bsn');
   },
   config: {
-    contractAddress: '0x86d9ff5624CBbD8244aBdf2176a63e53c76e920c',
+    contractAddress: '0x9eD769ae0faBE432cB334fe57edF588120E8e481',
     providerUrl:
       'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',
   },

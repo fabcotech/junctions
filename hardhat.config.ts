@@ -12,7 +12,7 @@ const config: HardhatUserConfig = {
     localhost: {
       url: 'http://127.0.0.1:8545/',
     },
-    bsctestnet: {
+    bnbtestnet: {
       url: 'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',
       accounts: [process.env.PRIVATE_KEY],
     },

@@ -28,7 +28,7 @@ npx @fabcotech/junctions resolve -v --load 'foo.dummy & bar.dummy'
 
 ```bash
 npm install
-PRIVATE_KEY=<your private key on bnb chain> npx hardhat run src/sol/scripts/deploy.ts --network bnbtestnet
+PRIVATE_KEY=<your private key on bnb chain> npx hardhat run scripts/deploy.ts --network bnbtestnet
 ```
 
 ## CLI

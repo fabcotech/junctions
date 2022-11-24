@@ -121,7 +121,7 @@ junction [command] [options]`
     },
   })
   .command({
-    command: 'pushrecordsbnb <privateKey> <domain> <filePath>',
+    command: 'pushrecordsbnb <privateKey> <domain>',
     aliases: ['r'],
     describe: 'create domain and push records on BNB Chain',
     builder: (yargs) => {
@@ -140,6 +140,7 @@ junction [command] [options]`
         })
         .option('filePath', {
           demandOption: true,
+          default: './records.json',
           alias: 'f',
           describe: 'file path to records file',
           type: 'string',
