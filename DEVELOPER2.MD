@@ -7,9 +7,9 @@ A new syntax in the address bar, and service discovery system that allows web se
 You can resolve those junctions that we have set up for demo purpose.
 
 ```
-npx junctions resolve "aapple.d & aamazon.d" -v -l
-npx junctions resolve "uuniswap.d & ccurve.d & iinch.d" -v -l
-npx junctions resolve "cchina.d & iindia.d & ffrance.d" -v -l
+npm run cli -- resolve "aapple.d & aamazon.d" -v -l
+npm run cli -- resolve "uuniswap.d & ccurve.d & iinch.d" -v -l
+npm run cli -- resolve "cchina.d & iindia.d & ffrance.d" -v -l
 ```
 
 ## Available resolvers
@@ -25,13 +25,13 @@ npx junctions resolve "cchina.d & iindia.d & ffrance.d" -v -l
 Resolve junction between dummy domains
 
 ```
-npx junctions resolve -v 'foo.dummy & bar.dummy'
+npm run cli -- resolve -v 'foo.dummy & bar.dummy'
 ```
 
 Resolve and then load data (likely html file) and chec hash
 
 ```
-npx junctions resolve -v --load 'foo.dummy & bar.dummy'
+npm run cli -- resolve -v --load 'foo.dummy & bar.dummy'
 ```
 
 ## Deploy NameSystem on BNB chain using NodeReal and Hardhat
@@ -42,20 +42,6 @@ PRIVATE_KEY=<your private key on bnb chain> npx hardhat run scripts/deploy.ts --
 ```
 
 ## CLI
-
-### Description
-
-```
-
-npx junctions [command] [options]
-
-Commands :
-npx junctions completion generate completion script
-
-Options :
---help Displays help [booléen]
---version Displays release number [booléen]
-```
 
 #### Know hash and config
 
@@ -70,12 +56,12 @@ This command outputs everything you need to know for setting up the junction. Yo
 # Get subdomain hash of a junction, and
 # data hash of ./examples/helloworld.html file
 
-npx junctions hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
+npm run cli -- hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
 
 # Get subdomain hash of another junction, and
 # data hash of myfile.html
 
-npx junctions hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
+npm run cli -- hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
 ```
 
 #### Dummy server
@@ -84,10 +70,10 @@ This script helps you ge things tested quickly. It runs a dev/local web server t
 
 ```sh
 # Serve default ./example/helloworld.html on port 3001
-npx junctions dummyserver
+npm run cli -- dummyserver
 
 # Serve ./example/aappleandaamazon.html on port 3001
-npx junctions dummyserver --file "./examples/aappleandaamazon.html"
+npm run cli -- dummyserver --file "./examples/aappleandaamazon.html"
 ```
 
 #### Resolve
@@ -96,13 +82,13 @@ Resolve a junction in verbose mode
 
 ```sh
 # Check if foo.dummy and bar.dummy have configured the junction
-npx junctions resolve 'foo.dummy & bar.dummy' -v
+npm run cli -- resolve 'foo.dummy & bar.dummy' -v
 
 # Check if apple.d and aamazon.d have configured the junction
-npx junctions resolve 'apple.d & aamazon.d' -v
+npm run cli -- resolve 'apple.d & aamazon.d' -v
 
 # In addition, try to load the html file and check hash
-npx junctions resolve 'apple.d & aamazon.d' --load -v
+npm run cli -- resolve 'apple.d & aamazon.d' --load -v
 ```
 
 ## Start dev
