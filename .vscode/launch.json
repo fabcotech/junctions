@@ -30,7 +30,22 @@
         "${workspaceRoot}/src/cli/index.ts",
         "setbnbrecords",
         "b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213",
-        "foo.bsc"
+        "foo.bns"
+      ]
+    },
+    {
+      "name": "CLI getbnbrecords",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": [
+        "${workspaceRoot}/src/cli/index.ts",
+        "getbnbrecords",
+        "paul.bns"
       ]
     },
     {
@@ -45,7 +60,7 @@
       "args": [
         "${workspaceRoot}/src/cli/index.ts",
         "resolve",
-        "foo.bsc & foo.bsc",
+        "foo.bns & foo.bns",
         "-v"
       ]
     },
