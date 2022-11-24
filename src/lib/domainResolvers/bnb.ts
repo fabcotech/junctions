@@ -92,7 +92,7 @@ const bnbResolver: DomainResolver = {
     };
   },
   canResolve: (domain: string) => {
-    return domain.endsWith('.bsc');
+    return domain.endsWith('.bns');
   },
   config,
 };

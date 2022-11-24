@@ -31,13 +31,13 @@ Junctions also have a great security benefit, they remove single point of failur
 
 #### How do junctions work
 
-`amazon.bsc & apple.bsc`
+`amazon.bns & apple.bns`
 
-Junction is materialized by a new syntax in the address bar, and a "&" separator between the hosts/domains/identities. The user just lists the domains in the address bar and presses Enter (ex: "amazon.bsc & apple.bsc").
+Junction is materialized by a new syntax in the address bar, and a "&" separator between the hosts/domains/identities. The user just lists the domains in the address bar and presses Enter (ex: "amazon.bns & apple.bns").
 
 Then the browser, or whichever program wants to load a file through a junction address will put domains in alphabetical order, generate a 16 characters hash, and resolve all addresses through whichever name system the domain points to (currently dappy or BNB Chain).
 
-For example `"amazon.bsc & apple.bsc"` hash is `6c1eb916b6a37488`, the browser will try to find two records for addresses `6c1eb916b6a37488.amazon.bsc` and `6c1eb916b6a37488.apple.bsc`.
+For example `"amazon.bns & apple.bns"` hash is `6c1eb916b6a37488`, the browser will try to find two records for addresses `6c1eb916b6a37488.amazon.bns` and `6c1eb916b6a37488.apple.bns`.
 
 We stick to conventions of the DNS, the browser will try to find a TXT record that contains the hash of the content, and a A record that contain the IP address from which the content will be loaded. **If all members of the junction have configured the same subdomain, and exactly the same records**, then content is loaded and checked against the hash.
 
@@ -49,7 +49,7 @@ You just need nodeJS + npm (recent) installed.
 
 The tuto written for hackaton examination consists in :
 
-- (1) Setting up the junction by choosing two `.bsc` domains, choosing HTML file to serve.
+- (1) Setting up the junction by choosing two `.bns` domains, choosing HTML file to serve.
 - (2) Registering two domains to simulate two parties registering a junction.
 - (3) Resolution and check that everything works.
 
@@ -62,30 +62,30 @@ npm run build:all
 
 #### (1) Setting up junction and hashes
 
-Pick up two domains that you want (ex: `bob.bsc` and `alice.bsc`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
+Pick up two domains that you want (ex: `bob.bns` and `alice.bns`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
 
 ```
-npm run cli -- hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
+npm run cli -- hashandconfig "alice.bns & bob.bns" --file ./examples/helloworld.html
 ```
 
 You can see that a subdomain hash is displayed, it is unique for this junction. A data hash has also been created, and the two records are in `records.json` that need to be registered onchain alongside both domains.
 
 #### (2) Domains registration
 
-We'll use BNB Chain (testnet) and NodeReal provider to register our domain on the name system smart contract. Binance Name Service lacked documentation, we've created a minimal name system with ERC721. Note that it could also work on the dappy name system, and a junction may even include different name systems (ex: `bob.d & alice.bsc & jack.com`).
+We'll use BNB Chain (testnet) and NodeReal provider to register our domain on the name system smart contract. Binance Name Service lacked documentation, we've created a minimal name system with ERC721. Note that it could also work on the dappy name system, and a junction may even include different name systems (ex: `bob.d & alice.bns & jack.com`).
 
 To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wallet private key will be needed and referenced as `<PRIVATE_KEY>` in script below. You can use this [faucet](https://testnet.bnbchain.org/faucet-smart) to get some BNB.
 
 ```sh
-npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bsc --verbose
-npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bsc --verbose
+npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bns --verbose
+npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bns --verbose
 ```
 
 #### (3) Resolution
 
 This steps simulates what a browser would do before displaying a HTML to the user. It is the most critical step. Under the hood it will :
 
-- Parse the junction : `bob.bsc & alice.bsc -> ["bob.bsc", "alice.bsc]`.
+- Parse the junction : `bob.bns & alice.bns -> ["bob.bns", "alice.bns]`.
 - Fetch the records for each domain
 - Make sure they match
 - Load the file with HTTP (insecure)
@@ -104,13 +104,13 @@ Push records on BNB Testnet chain
 Only resolution
 
 ```sh
-npm run cli -- resolve "bob.bsc & alice.bsc" --verbose
+npm run cli -- resolve "bob.bns & alice.bns" --verbose
 ```
 
 Resolution + check of the HTML file + display on screen
 
 ```sh
-npm run cli -- resolve "bob.bsc & alice.bsc" --verbose --load
+npm run cli -- resolve "bob.bns & alice.bns" --verbose --load
 ```
 
 You should see two "Successful" green logs, and see the HTML file printed on screen. It means that the data/file has been resolved, and the two members of the junction mutually endorse/attest it.

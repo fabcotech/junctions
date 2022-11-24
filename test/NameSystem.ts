@@ -38,40 +38,40 @@ describe('NameSystem contract', function () {
     });
 
     it('Should mint a domain', async () => {
-      await contract.mintTo(owner.address, 'foo.bsc');
+      await contract.mintTo(owner.address, 'foo.bns');
       expect(await contract.ownerOf(1)).to.equal(owner.address);
     });
 
     it('Should not mint a domain already taken', async () => {
-      await contract.mintTo(owner.address, 'foo.bsc');
+      await contract.mintTo(owner.address, 'foo.bns');
       expect(await contract.ownerOf(1)).to.equal(owner.address);
 
       await expect(
-        contract.mintTo(owner.address, 'foo.bsc')
+        contract.mintTo(owner.address, 'foo.bns')
       ).to.be.revertedWith('domain already exists');
     });
 
     it('domain owner should set records', async () => {
-      await contract.mintTo(owner.address, 'foo.bsc');
-      await contract.setRecords('foo.bsc', fakeZoneRecords);
-      expect(await contract.getRecords('foo.bsc')).to.equal(fakeZoneRecords);
+      await contract.mintTo(owner.address, 'foo.bns');
+      await contract.setRecords('foo.bns', fakeZoneRecords);
+      expect(await contract.getRecords('foo.bns')).to.equal(fakeZoneRecords);
 
       await expect(
-        contract.connect(otherUser).setRecords('foo.bsc', fakeZoneRecords)
+        contract.connect(otherUser).setRecords('foo.bns', fakeZoneRecords)
       ).to.be.revertedWith('Not owner of this domain');
     });
 
     it('Should get records', async () => {
-      await contract.mintTo(owner.address, 'foo.bsc');
+      await contract.mintTo(owner.address, 'foo.bns');
       expect(await contract.ownerOf(1)).to.equal(owner.address);
-      await contract.setRecords('foo.bsc', fakeZoneRecords);
+      await contract.setRecords('foo.bns', fakeZoneRecords);
 
-      const records = await contract.getRecords('foo.bsc');
+      const records = await contract.getRecords('foo.bns');
       expect(records).to.equal(fakeZoneRecords);
     });
     it('Should not get records for a domain that does not exist', async () => {
       await expect(
-        contract.getRecords('notexistingdomain.bsc')
+        contract.getRecords('notexistingdomain.bns')
       ).to.be.revertedWith('domain does not exist');
     });
   });

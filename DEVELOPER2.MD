@@ -61,7 +61,7 @@ npm run cli -- hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
 # Get subdomain hash of another junction, and
 # data hash of myfile.html
 
-npm run cli -- hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
+npm run cli -- hashandconfig 'bob.d & alice.bns' --file ./myfile.html
 ```
 
 #### Dummy server
