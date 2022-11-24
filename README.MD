@@ -2,7 +2,7 @@
 
 A radically new and simple way to address content that need multiparty endorsement or validation, without intermediary.
 
-You want to check the [4 minutes video with slides](https://youtube.com) (Facility / Tutorial not included in video), or just read the text.
+You may want to check the [video with slides](https://www.youtube.com/watch?v=d7I0-0riRh8). The video is not mandatory for understanding the project, this document is self-suffiscient. Also the video does not include Facility / Tutorial.
 
 ### Problem
 
@@ -45,7 +45,7 @@ We stick to conventions of the DNS, the browser will try to find a TXT record th
 
 ### Facility
 
-You just need nodeJS + npm (recent) installed.
+You (1) need nodeJS + npm (recent) installed, (2) a private key with funds on BNB chain (testnet).
 
 ### Tutorial (hackaton)
 
@@ -81,6 +81,9 @@ To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wal
 ```sh
 npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bns --verbose
 npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bns --verbose
+
+# Check that domain exists (and data)
+npm run cli -- getbnbrecords bob.bns
 ```
 
 #### (3) Resolution
@@ -101,9 +104,7 @@ file on port 3001 (default)
 npm run cli -- dummyserver --file ./examples/helloworld.html
 ```
 
-Push records on BNB Testnet chain
-
-Only resolution
+Just resolve the junction, and see of all members match
 
 ```sh
 npm run cli -- resolve "bob.bns & alice.bns" --verbose
