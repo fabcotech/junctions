@@ -18,7 +18,7 @@
     "build:ts:watch": "tsc -w -p tsconfig.json",
     "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
     "start:server": "node dist/server/index.js",
-    "start:cli": "node dist/cli/index.js",
+    "cli": "node dist/cli/index.js",
     "test:types": "npx tsc --project ./tsconfig.json --noEmit",
     "test:sol": "hardhat test",
     "build:sol": "hardhat compile",

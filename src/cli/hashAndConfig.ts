@@ -44,5 +44,5 @@ export const hashAndConfig = async ({
     },
   ];
   console.log(JSON.stringify(records, null, 2));
-  fs.writeFileSync(recordsFilePath, JSON.stringify(records), 'utf8');
+  fs.writeFileSync(recordsFilePath, JSON.stringify(records, null, 2), 'utf8');
 };

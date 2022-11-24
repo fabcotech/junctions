@@ -30,7 +30,7 @@
         "${workspaceRoot}/src/cli/index.ts",
         "setbnbrecords",
         "b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213",
-        "foo.bsn"
+        "foo.bsc"
       ]
     },
     {
@@ -45,7 +45,7 @@
       "args": [
         "${workspaceRoot}/src/cli/index.ts",
         "resolve",
-        "foo.bsn & foo.bsn",
+        "foo.bsc & foo.bsc",
         "-v"
       ]
     },

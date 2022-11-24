@@ -64,7 +64,7 @@ npm i
 Pick up two domains that you want (ex: `bob.bsc` and `alice.bsc`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
 
 ```
-npx junctions hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
+npm run cli -- hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
 ```
 
 You can see that a subdomain hash is displayed, it is unique for this junction. A data hash has also been created, and the two records are in `records.json` that need to be registered onchain alongside both domains.
@@ -88,16 +88,26 @@ This steps simulates what a browser would do before displaying a HTML to the use
 - Check hash of the file
 - Display HTML in the browser, or in the command line
 
+To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wallet private key will be needed and referenced as <PRIVATE_KEY> in script below. You can use this [faucet](https://testnet.bnbchain.org/faucet-smart) to get some BNB.
+
 ```
 # Run the dummy server that will serve your HTML
 # file on port 3001 (default)
-dummyserver --file ./examples/helloworld.html
+npm run cli -- dummyserver --file ./examples/helloworld.html
+
+# Push records on BNB Testnet chain
+npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bsc --verbose
+npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bsc --verbose
+
+
+npm run cli -- setbnbrecords b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213 bob.bsc --verbose
+npm run cli -- setbnbrecords b9db745d4bc8ebe5fdeef76274a9a3619fb9f07e92978b8ceaf8a7d6be040213 alice.bsc --verbose
 
 # Only resolution
-npx junctions resolve "bob.bsc & alice.bsc" --verbose
+npm run cli -- resolve "bob.bsc & alice.bsc" --verbose
 
 # Resolution + check of the HTML file + display on screen
-npx junctions resolve "bob.bsc & alice.bsc" --verbose --load
+npm run cli -- resolve "bob.bsc & alice.bsc" --verbose --load
 ```
 
 You should see two "Successful" green logs, and see the HTML file printed on screen. It means that the data/file has been resolved, and the two members of the junction mutually endorse/attest it.

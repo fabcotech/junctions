@@ -36,9 +36,11 @@ export const setRecordsOnBNB = async ({
     gasLimit: MAX_GAS_LIMIT,
   });
 
-  await contract.connect(wallet).setRecords(domain, records, {
-    gasLimit: MAX_GAS_LIMIT,
-  });
+  await contract
+    .connect(wallet)
+    .setRecords(domain, JSON.stringify(JSON.parse(records)), {
+      gasLimit: MAX_GAS_LIMIT,
+    });
 
   console.log('Records set on Binance Smart Chain Testnet');
 };
