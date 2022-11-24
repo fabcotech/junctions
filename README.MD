@@ -77,7 +77,7 @@ This script helps you ge things tested quickly. It runs a dev/local web server t
 npx @fabcotech/junctions dummyserver
 
 # Serve ./example/aappleandaamazon.html on port 3001
-npx @fabcotech/junctions dummyserver --file "./examples/aapple&aamazon.html"
+npx @fabcotech/junctions dummyserver --file "./examples/aappleandaamazon.html"
 ```
 
 #### Resolve
