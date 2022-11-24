@@ -6,6 +6,8 @@ A radically new and simple way to expose content and front-ends with multiple en
 
 You may want to check the [video with slides](https://www.youtube.com/watch?v=d7I0-0riRh8). The video is not mandatory for understanding the project, this document is self-suffiscient. Also the video does not include Facility / Tutorial.
 
+Our implementation uses two name systems : [dappy](https://dappy.tech/) and a custom name system deployed on **BNB Chain**. **NodeReal** is used for sending EVM transactions, and **Starton** API system for the ERC721 template, and reading the records from BNB Chain.
+
 ### Problem
 
 Every naming system in the digital world like DNS, or even blockchain name systems like dappy, ENS or Unstoppable Domains points to unique targets, for example you visit _apple.com_, _uniswap.org_ or _us.gov_.
@@ -44,6 +46,8 @@ Then the browser, or whichever program wants to load a file through a junction a
 For example `"amazon.bns & apple.bns"` hash is `6c1eb916b6a37488`, the browser will try to find two records for addresses `6c1eb916b6a37488.amazon.bns` and `6c1eb916b6a37488.apple.bns`.
 
 We stick to conventions of the DNS, the browser will try to find a TXT record that contains the hash of the content, and a A record that contain the IP address from which the content will be loaded. **If all members of the junction have configured the same subdomain, and exactly the same records**, then content is loaded and checked against the hash.
+
+Our examples, and the following tutorial works with two identities, junctions can scale to infinity, **20 companies can co-endorse a front-end application**.
 
 ### Facility
 
@@ -122,13 +126,13 @@ You should see two "Successful" green logs, and see the HTML file printed on scr
 
 Congratulations !
 
-### Business model / tokens
+### Business model, tokenomics, potential of growth
 
 Junctions do not strictly have or need a token, nor do they have a direct business model, they have an indirect one. Junctions is a technology that can plug on existing name systems.
 
 Junctions provide superior accuracy, security, and new levels of expressiveness for online services and content addressing. If people, companies and associations want to use junctions, they'll need domain names. Whatever is the tokenisation, renewal policy, and pricing of the underlying name systems, they will benefit from plugging onto this new standard.
 
-We're happy to discuss the economic aspect anytime (dappy, DNS, BNS, ENS etc.), nevertheless it may be out of scope to extend too much in this document.
+We're happy to discuss the economic aspect anytime, nevertheless it may be out of scope to extend too much in this document.
 
 ### Team and comments
 
