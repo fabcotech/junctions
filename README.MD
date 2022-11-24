@@ -4,7 +4,7 @@
 
 A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.
 
-Resolve some junctions for fun
+You can resolve those junctions that we have set up for demo purpose.
 
 ```
 npx junctions resolve "aapple.d & aamazon.d" -v -l
@@ -151,62 +151,3 @@ adb4191dc2e52913a359dcc2c8aaaacd8f7f4b541f0d4380b7c72b2aa182d9bf
 ffrance&cchina&&iindia.html
 cd146eb5b32f1df04e702bd9c4eaecb79ecd02e224d03df78d7190ae4382e5f6
 ```
-
-### Tutorial (hackaton)
-
-The tuto written for hackaton examination consists in :
-
-- (1) Setting up the junction, choosing HTML file to serve.
-- (2) Registering two domains to simulate two parties registering a junction.
-- (3) Resolution and check that everything works.
-
-```
-git clone https://github.com/fabcotech/junctions.git
-cd junctions
-npm i
-```
-
-#### (1) Setting up junction and hashes
-
-Pick up two domains that you want (ex: `bob.bsc` and `alice.bsc`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
-
-```
-npx junctions hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
-```
-
-You can see that a subdomain hash is displayed, it is unique for your junction. A data hash has also been created, and the two records (`records.json`) that need to be registered alongside both domains.
-
-#### (2) Domains registration
-
-We'll use BNB Chain (testnet) and NodeReal provider to register our domain on the name system smart contract. Binance Name Service lacked documentation, we've created a minimal name system with ERC721. Note that it could also work on the dappy name system, and a junction may even include different name systems (ex: `bob.d & alice.bsc & jack.com`).
-
-```
-
-```
-
-#### (3) Resolution
-
-This steps simulates what a browser would do before displaying a HTML to the user. It is the most critical step. Under the hood it will :
-
-- Parse the junction : `bob.bsc & alice.bsc -> ["bob.bsc", "alice.bsc]`.
-- Fetch the records for each domain
-- Make sure they match
-- Load the file with HTTP (insecure)
-- Check hash of the file
-- Display HTML in the browser, or in the command line
-
-```
-# Run the dummy server that will serve your HTML
-# file on port 3001 (default)
-dummyserver --file ./examples/helloworld.html
-
-# Only resolution
-npx junctions resolve "bob.bsc & alice.bsc" --verbose
-
-# Resolution + check of the HTML file + display on screen
-npx junctions resolve "bob.bsc & alice.bsc" --verbose --load
-```
-
-You should see two "Successful" green logs, and see the HTML file printed on screen. It means that the data/file has been resolved, and the two members of the junction mutually endorse/attest it.
-
-Congratulations !
