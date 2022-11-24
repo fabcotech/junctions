@@ -2,7 +2,9 @@ import fs from 'fs';
 import { ethers } from 'ethers';
 import { bnbResolver } from '../lib/domainResolvers';
 
-export const pushRecordsOnBNB = async ({
+const MAX_GAS_LIMIT = 10000000;
+
+export const setRecordsOnBNB = async ({
   privateKey,
   domain,
   filePath,
@@ -25,6 +27,18 @@ export const pushRecordsOnBNB = async ({
   const contract = new ethers.Contract(config.contractAddress, abi, wallet);
   const records = fs.readFileSync(filePath, 'utf8');
 
-  await contract.connect(privateKey).mintTo(wallet.address, domain);
-  await contract.connect(privateKey).setRecords(domain, records);
+  console.log('Setting records on Binance Smart Chain Testnet...');
+  console.log();
+  console.log('For domain:', domain);
+  console.log('Records:', JSON.stringify(JSON.parse(records), null, 2));
+
+  await contract.connect(wallet).mintTo(wallet.address, domain, {
+    gasLimit: MAX_GAS_LIMIT,
+  });
+
+  await contract.connect(wallet).setRecords(domain, records, {
+    gasLimit: MAX_GAS_LIMIT,
+  });
+
+  console.log('Records set on Binance Smart Chain Testnet');
 };

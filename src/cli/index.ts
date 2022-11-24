@@ -5,7 +5,8 @@ import chalk from 'chalk';
 import { dummyServer } from './dummyServer';
 import { hashAndConfig } from './hashAndConfig';
 import { resolveJunction } from './resolveJunction';
-import { pushRecordsOnBNB } from './pushRecordsBNB';
+import { setRecordsOnBNB } from './setRecordsBNB';
+import { getRecordsOnBNB } from './getRecordsBNB';
 
 const title = chalk.yellow('CLI junction');
 
@@ -121,9 +122,9 @@ junction [command] [options]`
     },
   })
   .command({
-    command: 'pushrecordsbnb <privateKey> <domain>',
+    command: 'setbnbrecords <privateKey> <domain>',
     aliases: ['r'],
-    describe: 'create domain and push records on BNB Chain',
+    describe: 'create domain and push records on BNB Chain Testnet',
     builder: (yargs) => {
       return yargs
         .option('privateKey', {
@@ -153,7 +154,30 @@ junction [command] [options]`
         });
     },
     handler: (argv) => {
-      pushRecordsOnBNB(argv);
+      setRecordsOnBNB(argv);
+    },
+  })
+  .command({
+    command: 'getbnbrecords <domain>',
+    aliases: ['r'],
+    describe: 'get domain records on BNB Chain',
+    builder: (yargs) => {
+      return yargs
+        .option('domain', {
+          demandOption: true,
+          alias: 'd',
+          describe: 'domain',
+          type: 'string',
+        })
+        .option('verbose', {
+          alias: 'v',
+          default: false,
+          type: 'boolean',
+          describe: 'verbose output',
+        });
+    },
+    handler: (argv) => {
+      getRecordsOnBNB(argv);
     },
   })
   .demandCommand()
