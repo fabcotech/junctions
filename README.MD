@@ -1,153 +1,111 @@
-# Junctions, by dappy team
+## Junctions
 
-**Track: Security**
+A radically new and simple way to address content that need multiparty endorsement or validation, without intermediary.
 
-A new syntax in the address bar, and service discovery system that allows web services to be endorsed by multiple parties, without trusted intermediary.
+### Problem
 
-You can resolve those junctions that we have set up for demo purpose.
+Every naming system in the digital world like DNS, or even blockchain name systems ENS or Unstoppable Domains work with unique targets, for example you visit _apple.com_, _uniswap.org_ or _apple.com_.
 
-```
-npx junctions resolve "aapple.d & aamazon.d" -v -l
-npx junctions resolve "uuniswap.d & ccurve.d & iinch.d" -v -l
-npx junctions resolve "cchina.d & iindia.d & ffrance.d" -v -l
-```
+Let's say Apple and Amazon want to run a special communication or campaign together, they want to mutually endorse or assert a file or even an entire front-end application, how are they supposed to do it ? And how can users easily and without trusted intermediaries know about this campaign and who endorses it ?
 
-## Available resolvers
+- _apple.com/amazonandapple_ is bad, apple is in control, can change the content unilateraly.
+- _amazon.com/amazonandapple_ has the same issue, the other way around.
+- _amazonandapple.com_ this website is controlled by a trusted third party, or by both parties, this is bad in either case. **Signatories/parties cannot be directly verified by end user**, plus the DNS/webPKI is not secure.
+- _amazonandapple.eth_ pointing to a smart contract / DAO / multisig : **Blockchain name systems do not change the deal at all**, users cannot verify who endorses the resource / data / HTML page that is resolved.
 
-- [dappy](./src/lib/domainResolvers/dappy.ts):
-  - `.d` domain names: domain names available on dappy d network (mainnet)
-  - `.gamma` domain names: domain names available on dappy gamma network
-- [dummy](./src/lib/domainResolvers/dummy.ts):
-  - `.dummy` domain names: For test purposes, always resolve to [RecordA: 127.0.0.1, RecordTXT: HASH=7316723...]
+This is a problem, or a great limitation of expressiveness and innovation. Thousands, if not millions of legal structures, events, business consortiums, online communications, web3 projects have a collaborative dimension. Today this collaborative dimension cannot be expressed with the naming technologies that are available.
 
-## How to use it
+### Solution
 
-Resolve junction between dummy domains
+Today in the context of the hackaton, we're presenting junctions. Junctions are a new and simple way to expose web services or any kind digital documents that need mutual endorsement, or validation by multiple parties.
 
-```
-npx junctions resolve -v 'foo.dummy & bar.dummy'
-```
+Junctions can be verified directly on screen by the user, without intermediary.
 
-Resolve and then load data (likely html file) and chec hash
+We think junctions will be a brick of the decentralized future for web3 as well as many legacy industries. In DeFi for example, wouldn't you prefer to do multi-million dollars swap on a front-end **that you know is endorsed by two security companies plus three respected web3 companies** ?
 
-```
-npx junctions resolve -v --load 'foo.dummy & bar.dummy'
-```
+Junctions make this possible, and make it very easy to do.
 
-## Deploy NameSystem on BNB chain using NodeReal and Hardhat
+Junctions are agnostic vis-à-vis the name system that is used, we are the dappy team so junctions are compatible with our secure name system (\*.d), but also with BNB Chain and eventually the DNS. A junction can include hosts that point to different name system protocols.
 
-```bash
-npm install
-PRIVATE_KEY=<your private key on bnb chain> npx hardhat run scripts/deploy.ts --network bnbtestnet
-```
+Junctions also have a great security benefit, they remove single point of failure, because by definition multiple identities must agree on a web page, for it to load on the screen.
 
-## CLI
+#### How do junctions work
 
-### Description
+`amazon.bsc & apple.bsc`
 
-```
+Junction is materialized by a new syntax in the address bar, and a "&" separator between the hosts/domains/identities. The user just lists the domains in the address bar and presses Enter (ex: "amazon.bsc & apple.bsc").
 
-npx junctions [command] [options]
+Then the browser, or whichever program wants to load a file through a junction address will put domains in alphabetical order, generate a 16 characters hash, and resolve all addresses through whichever name system the domain points to (currently dappy or BNB Chain).
 
-Commands :
-npx junctions completion generate completion script
+For example `"amazon.bsc & apple.bsc"` hash is `6c1eb916b6a37488`, the browser will try to find two records for addresses `6c1eb916b6a37488.amazon.bsc` and `6c1eb916b6a37488.apple.bsc`.
 
-Options :
---help Displays help [booléen]
---version Displays release number [booléen]
-```
+We stick to conventions of the DNS, the browser will try to find a TXT record that contains the hash of the content, and a A record that contain the IP address from which the content will be loaded. **If all members of the junction have configured the same subdomain, and exactly the same records**, then content is loaded and checked against the hash.
 
-#### Know hash and config
+### Facility
 
-Two hashes must be known to create a junction :
+You just need nodeJS + npm (recent) installed.
 
-- the subdomain hash, a 16 charaters long string that is unique for a given junction. For example hash of `"foo.d & bar.d"` is `"1dca7ed1f458746c"`.
-- the data hash, a full hash of the data (often a html page).
+### Tutorial (hackaton)
 
-This command outputs everything you need to know for setting up the junction. You can then update the records in dappy name system or any other name system.
+The tuto written for hackaton examination consists in :
+
+- (1) Setting up the junction by choosing two `.bsc` domains, choosing HTML file to serve.
+- (2) Registering two domains to simulate two parties registering a junction.
+- (3) Resolution and check that everything works.
 
 ```
-# Get subdomain hash of a junction, and
-# data hash of ./examples/helloworld.html file
-
-npx junctions hashandconfig 'foo.d & bar.d' --file ./examples/helloworld.html
-
-# Get subdomain hash of another junction, and
-# data hash of myfile.html
-
-npx junctions hashandconfig 'bob.d & alice.bsc' --file ./myfile.html
+git clone https://github.com/fabcotech/junctions.git
+cd junctions
+npm i
 ```
 
-#### Dummy server
+#### (1) Setting up junction and hashes
 
-This script helps you ge things tested quickly. It runs a dev/local web server that serves a html file.
-
-```sh
-# Serve default ./example/helloworld.html on port 3001
-npx junctions dummyserver
-
-# Serve ./example/aappleandaamazon.html on port 3001
-npx junctions dummyserver --file "./examples/aappleandaamazon.html"
-```
-
-#### Resolve
-
-Resolve a junction in verbose mode
-
-```sh
-# Check if foo.dummy and bar.dummy have configured the junction
-npx junctions resolve 'foo.dummy & bar.dummy' -v
-
-# Check if apple.d and aamazon.d have configured the junction
-npx junctions resolve 'apple.d & aamazon.d' -v
-
-# In addition, try to load the html file and check hash
-npx junctions resolve 'apple.d & aamazon.d' --load -v
-```
-
-## Start dev
-
-```sh
-npm run build:all & npm start
-```
-
-or
-
-In a dedicated terminal
-
-```sh
-npm run build:all
-npm run build:watch
-```
-
-and another terminal
-
-```sh
-npm start
-```
-
-## Start server
-
-```sh
-npm run start:server
-```
-
-## Run tests
-
-```sh
-npm test
-npm test:types
-```
-
-## Example files
+Pick up two domains that you want (ex: `bob.bsc` and `alice.bsc`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
 
 ```
-11inch&ccurve&&uuniswap.html
-42e85a5c3638e8b45e30d022d513f20841adda36699cabe9cfd0b105c6424c0f
-
-aapple&aamazon.html
-adb4191dc2e52913a359dcc2c8aaaacd8f7f4b541f0d4380b7c72b2aa182d9bf
-
-ffrance&cchina&&iindia.html
-cd146eb5b32f1df04e702bd9c4eaecb79ecd02e224d03df78d7190ae4382e5f6
+npx junctions hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
 ```
+
+You can see that a subdomain hash is displayed, it is unique for this junction. A data hash has also been created, and the two records are in `records.json` that need to be registered onchain alongside both domains.
+
+#### (2) Domains registration
+
+We'll use BNB Chain (testnet) and NodeReal provider to register our domain on the name system smart contract. Binance Name Service lacked documentation, we've created a minimal name system with ERC721. Note that it could also work on the dappy name system, and a junction may even include different name systems (ex: `bob.d & alice.bsc & jack.com`).
+
+```
+
+```
+
+#### (3) Resolution
+
+This steps simulates what a browser would do before displaying a HTML to the user. It is the most critical step. Under the hood it will :
+
+- Parse the junction : `bob.bsc & alice.bsc -> ["bob.bsc", "alice.bsc]`.
+- Fetch the records for each domain
+- Make sure they match
+- Load the file with HTTP (insecure)
+- Check hash of the file
+- Display HTML in the browser, or in the command line
+
+```
+# Run the dummy server that will serve your HTML
+# file on port 3001 (default)
+dummyserver --file ./examples/helloworld.html
+
+# Only resolution
+npx junctions resolve "bob.bsc & alice.bsc" --verbose
+
+# Resolution + check of the HTML file + display on screen
+npx junctions resolve "bob.bsc & alice.bsc" --verbose --load
+```
+
+You should see two "Successful" green logs, and see the HTML file printed on screen. It means that the data/file has been resolved, and the two members of the junction mutually endorse/attest it.
+
+Congratulations !
+
+### Team and comments
+
+I'm Raph, lead dev of dappy project, we're a team passionate about security of web services, web3 and decentralized technologies. The last two years we've created a unique name system and webPKI technology that aim at addressing industry-wide security and privacy issues and limitations of current protocols. Junctions is an additional innovation above what we've already built.
+
+The dev team is composed of myself and Paul Musso (dappy team).
