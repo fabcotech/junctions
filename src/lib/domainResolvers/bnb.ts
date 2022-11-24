@@ -1,10 +1,9 @@
 import { DomainResolver } from './domainResolver';
 import { ethers } from 'ethers';
 import NameSystem from './NameSystem.json';
-// import { JunctionRecords } from 'lib/types';
 
 const config = {
-  contractAddress: '0x9eD769ae0faBE432cB334fe57edF588120E8e481',
+  contractAddress: '0xb7249d9F66DD9470C26b02fAB8f519F18971CEb6',
   abi: NameSystem.abi,
   providerUrl:
     'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',
