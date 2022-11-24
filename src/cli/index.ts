@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import { dummyServer } from './dummyServer';
 import { hashAndConfig } from './hashAndConfig';
 import { resolveJunction } from './resolveJunction';
+import { pushRecordsOnBNB } from './pushRecordsBNB';
 
 const title = chalk.yellow('CLI junction');
 
@@ -116,6 +117,41 @@ junction [command] [options]`
     },
     handler(argv) {
       hashAndConfig(argv);
+    },
+  })
+  .command({
+    command: 'pushrecordsbnb <privateKey> <domain> <filePath>',
+    aliases: ['r'],
+    describe: 'create domain and push records on BNB Chain',
+    builder: (yargs) => {
+      return yargs
+        .option('privateKey', {
+          demandOption: true,
+          alias: 'k',
+          describe: 'private key',
+          type: 'string',
+        })
+        .option('domain', {
+          demandOption: true,
+          alias: 'd',
+          describe: 'domain',
+          type: 'string',
+        })
+        .option('filePath', {
+          demandOption: true,
+          alias: 'f',
+          describe: 'file path to records file',
+          type: 'string',
+        })
+        .option('verbose', {
+          alias: 'v',
+          default: false,
+          type: 'boolean',
+          describe: 'verbose output',
+        });
+    },
+    handler: (argv) => {
+      pushRecordsOnBNB(argv);
     },
   })
   .demandCommand()

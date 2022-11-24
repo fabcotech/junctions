@@ -21,6 +21,11 @@ const bnbResolver: DomainResolver = {
   canResolve: (domain: string) => {
     return domain.endsWith('.bsn');
   },
+  config: {
+    contractAddress: '0x86d9ff5624CBbD8244aBdf2176a63e53c76e920c',
+    providerUrl:
+      'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',
+  },
 };
 
 export default bnbResolver;
