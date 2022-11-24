@@ -73,8 +73,11 @@ You can see that a subdomain hash is displayed, it is unique for this junction. 
 
 We'll use BNB Chain (testnet) and NodeReal provider to register our domain on the name system smart contract. Binance Name Service lacked documentation, we've created a minimal name system with ERC721. Note that it could also work on the dappy name system, and a junction may even include different name systems (ex: `bob.d & alice.bsc & jack.com`).
 
-```
+To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wallet private key will be needed and referenced as `<PRIVATE_KEY>` in script below. You can use this [faucet](https://testnet.bnbchain.org/faucet-smart) to get some BNB.
 
+```sh
+npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bsc --verbose
+npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bsc --verbose
 ```
 
 #### (3) Resolution
@@ -88,8 +91,6 @@ This steps simulates what a browser would do before displaying a HTML to the use
 - Check hash of the file
 - Display HTML in the browser, or in the command line
 
-To set a domain on BNB Testnet Chain, you will need an wallet with some BNB. Wallet private key will be needed and referenced as `<PRIVATE_KEY>` in script below. You can use this [faucet](https://testnet.bnbchain.org/faucet-smart) to get some BNB.
-
 Run the dummy server that will serve your HTML
 file on port 3001 (default)
 
@@ -98,11 +99,6 @@ npm run cli -- dummyserver --file ./examples/helloworld.html
 ```
 
 Push records on BNB Testnet chain
-
-```sh
-npm run cli -- setbnbrecords <PRIVATE_KEY> bob.bsc --verbose
-npm run cli -- setbnbrecords <PRIVATE_KEY> alice.bsc --verbose
-```
 
 Only resolution
 
