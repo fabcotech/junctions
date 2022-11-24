@@ -1,6 +1,6 @@
 import { DomainResolver } from './domainResolver';
-import { ethers } from 'ethers';
 import NameSystem from './NameSystem.json';
+import { postRequest } from '../utils';
 
 const config = {
   contractAddress: '0xb7249d9F66DD9470C26b02fAB8f519F18971CEb6',
@@ -9,23 +9,28 @@ const config = {
     'https://bsc-testnet.nodereal.io/v1/a49c22a98e96491085f76cfa15a3e901',
 };
 
+export const getRawRecordsUsingStarton = async (domain: string) => {
+  const r = await postRequest(
+    'api.starton.io',
+    `/v3/smart-contract/binance-testnet/${config.contractAddress}/read`,
+    {
+      functionName: 'getRecords',
+      params: [domain],
+    }
+  );
+  return r.response;
+};
+
 const bnbResolver: DomainResolver = {
   resolve: async (domain: string) => {
-    const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
-    const contract = new ethers.Contract(
-      config.contractAddress,
-      config.abi,
-      provider
-    );
-
-    let rawRecords;
+    let rawRecords: string = '';
 
     let parts = domain.split('.');
     let tld = parts.slice(-2).join('.');
     let subdomain = parts.slice(0, -2).join('.');
 
     try {
-      rawRecords = await contract.getRecords(tld);
+      rawRecords = await getRawRecordsUsingStarton(tld);
     } catch (error) {
       if (error instanceof Error) {
         return {

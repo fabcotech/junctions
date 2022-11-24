@@ -1,5 +1,5 @@
-import { ethers } from 'ethers';
 import { bnbResolver } from '../lib/domainResolvers';
+import { getRawRecordsUsingStarton } from '../lib/domainResolvers/bnb';
 
 export const getRecordsOnBNB = async ({
   domain,
@@ -17,16 +17,8 @@ export const getRecordsOnBNB = async ({
     return;
   }
 
-  const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
-  const contract = new ethers.Contract(
-    config.contractAddress,
-    config.abi,
-    provider
-  );
-
-  const records = await contract.getRecords(domain);
-
+  const records = JSON.parse(await getRawRecordsUsingStarton(domain));
   console.log(`${domain} records from Binance Smart Chain Testnet:`);
   console.log();
-  console.log(JSON.stringify(JSON.parse(records), null, 2));
+  console.log(JSON.stringify(records, null, 2));
 };
