@@ -33,10 +33,18 @@ export const hashAndConfig = async ({
     console.log(hash);
   }
   console.log('\nrecords needed for junction :\n');
-  console.log(`[
-  { "type": "A", "name": "${getJunctionSubdomain(junction)}", "data": "${ip}" },
-  { "type": "TXT", "name": "${getJunctionSubdomain(
-    junction
-  )}", "data": "HASH=${hash}" }
-]`);
+  const records = JSON.stringify(
+    [
+      { type: 'A', name: `${getJunctionSubdomain(junction)}`, data: `${ip}` },
+      {
+        type: 'TXT',
+        name: `${getJunctionSubdomain(junction)}`,
+        data: `HASH=${hash}`,
+      },
+    ],
+    null,
+    1
+  );
+  console.log(records);
+  fs.writeFileSync('./records.json', records, 'utf8');
 };

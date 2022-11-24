@@ -140,3 +140,54 @@ adb4191dc2e52913a359dcc2c8aaaacd8f7f4b541f0d4380b7c72b2aa182d9bf
 ffrance&cchina&&iindia.html
 cd146eb5b32f1df04e702bd9c4eaecb79ecd02e224d03df78d7190ae4382e5f6
 ```
+
+### Tutorial (hackaton)
+
+The tuto written for hackaton examination consists in :
+
+- (1) Setting up the junction, choosing HTML file to serve.
+- (2) Registering two domains to simulate two parties registering a junction.
+- (3) Resolution and check that everything works.
+
+#### (1) Setting up junction and hashes
+
+Pick up two domains that you want (ex: `bob.bsc` and `alice.bsc`). And choose the html file that will be exposed through the junction (ex: `./examples/helloworld.html`).
+
+```
+npm i
+
+npx @fabcotech/junctions hashandconfig "alice.bsc & bob.bsc" --file ./examples/helloworld.html
+```
+
+You can see that a subdomain hash is displayed, it is unique for your junction. A data hash has also been created, and the two records (`records.json`) that need to be registered alongside both domains.
+
+#### (2) Domains registration
+
+We'll use BNB Chain (testnet) and NodeReal provider to register our domain on the name system smart contract. Binance Name Service lacked documentation, we've created a minimal name system with ERC721. Note that it could also work on the dappy name system, and a junction may even include different name systems (ex: `bob.d & alice.bsc & jack.com`).
+
+```
+
+```
+
+#### (3) Resolution
+
+This steps simulates what a browser would do before displaying a HTML to the user. It is the most critical step. Under the hood it will :
+
+- Parse the junction : `bob.bsc & alice.bsc -> ["bob.bsc", "alice.bsc]`.
+- Fetching the records for each domain
+- Making sure they match
+- Finally loading the file with HTTP
+- Checking hash of the file
+- Displaying HTML in the browser, or in the output
+
+```
+# Run the dummy server that will serve your HTML
+# file on port 3001 (default)
+dummyserver --file ./examples/aapple\&aamazon.html
+
+# Only resolution
+npx @fabcotech/junctions resolve "aapple.d & aamazon.d" -v
+
+# Resolution + check of the HTML file + display on screen
+npx @fabcotech/junctions resolve "aapple.d & aamazon.d" -v --load
+```
