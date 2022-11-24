@@ -109,10 +109,11 @@ junction [command] [options]`
           type: 'number',
           alias: 'p',
         })
-        .option('pushOnBNB', {
-          default: false,
-          type: 'boolean',
-          describe: 'push zone on BNC Chain',
+        .option('recordsFilePath', {
+          default: './records.json',
+          type: 'string',
+          describe: 'path to records file',
+          alias: 'r',
         });
     },
     handler(argv) {

@@ -10,12 +10,14 @@ export const hashAndConfig = async ({
   ip,
   port,
   file,
+  recordsFilePath,
 }: {
   junction: string;
   host: string;
   ip: string;
   file: string | undefined;
   port: number;
+  recordsFilePath: string;
 }) => {
   let hash;
   console.log(`Subdomain hash : ${getJunctionSubdomain(junction)}\n`);
@@ -32,4 +34,15 @@ export const hashAndConfig = async ({
     console.log('\nData hash (blake2s) :\n');
     console.log(hash);
   }
+  console.log('\nrecords needed for junction :\n');
+  const records = [
+    { type: 'A', name: `${getJunctionSubdomain(junction)}`, data: `${ip}` },
+    {
+      type: 'TXT',
+      name: `${getJunctionSubdomain(junction)}`,
+      data: `HASH=${hash}`,
+    },
+  ];
+  console.log(JSON.stringify(records, null, 2));
+  fs.writeFileSync(recordsFilePath, JSON.stringify(records), 'utf8');
 };
