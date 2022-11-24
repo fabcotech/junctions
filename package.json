@@ -7,8 +7,10 @@
     "junctions": "./dist/cli/index.js"
   },
   "engines": {
+    "npm": ">=8.0.0",
     "node": ">= 18"
   },
+  "engineStrict": true,
   "files": [
     "dist/"
   ],
