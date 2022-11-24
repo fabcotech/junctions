@@ -20,6 +20,7 @@ export const setRecordsOnBNB = async ({
 
   if (!domain.endsWith('.bns')) {
     console.log('Domain must end with .bns');
+    process.exit(1);
   }
 
   const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);

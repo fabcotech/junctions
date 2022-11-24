@@ -9,6 +9,7 @@ export const getRecordsOnBNB = async ({
 }) => {
   if (!domain.endsWith('.bns')) {
     console.log('Domain must end with .bns');
+    process.exit(1);
   }
 
   const { config } = bnbResolver;
