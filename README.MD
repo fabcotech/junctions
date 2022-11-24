@@ -1,12 +1,14 @@
 ## Junctions
 
-A radically new and simple way to address content that need multiparty endorsement or validation, without intermediary.
+![Junctions, by dappy team](https://raw.githubusercontent.com/fabcotech/junctions/master/board.png)
+
+A radically new and simple way to expose content and front-ends with multiple endorsement, (validation by multiple ideneities), without intermediary.
 
 You may want to check the [video with slides](https://www.youtube.com/watch?v=d7I0-0riRh8). The video is not mandatory for understanding the project, this document is self-suffiscient. Also the video does not include Facility / Tutorial.
 
 ### Problem
 
-Every naming system in the digital world like DNS, or even blockchain name systems ENS or Unstoppable Domains points to unique targets, for example you visit _apple.com_, _uniswap.org_ or _us.gov_.
+Every naming system in the digital world like DNS, or even blockchain name systems like dappy, ENS or Unstoppable Domains points to unique targets, for example you visit _apple.com_, _uniswap.org_ or _us.gov_.
 
 Let's say Apple and Amazon want to run a special communication or campaign together, they want to mutually endorse or assert a file or even an entire front-end application, how are they supposed to do it ? And how can users easily and without trusted intermediaries know about this campaign and who endorses it ?
 
@@ -120,12 +122,16 @@ You should see two "Successful" green logs, and see the HTML file printed on scr
 
 Congratulations !
 
+### Business model / tokens
+
+Junctions do not strictly have or need a token, nor do they have a direct business model, they have an indirect one. Junctions is a technology that can plug on existing name systems.
+
+Junctions provide superior accuracy, security, and new levels of expressiveness for online services and content addressing. If people, companies and associations want to use junctions, they'll need domain names. Whatever is the tokenisation, renewal policy, and pricing of the underlying name systems, they will benefit from plugging onto this new standard.
+
+We're happy to discuss the economic aspect anytime (dappy, DNS, BNS, ENS etc.), nevertheless it may be out of scope to extend too much in this document.
+
 ### Team and comments
 
-I'm Raph, lead dev of dappy project, we're a team passionate about security of web services, web3 and decentralized technologies. The last two years we've created a unique name system and webPKI technology that aim at addressing industry-wide security and privacy issues and limitations of current protocols. Junctions is an additional innovation above what we've already built.
+I'm Raph, lead dev of dappy project, we're a team passionate about security of web services, web3 and decentralized technologies. The last two years (dappy team) we've created a unique name system and webPKI technology that aims at addressing industry-wide security, privacy issues and limitations of current protocols. Junctions is an additional innovation above what we've already built.
 
 The dev team is composed of myself and Paul Musso (dappy team).
-
-```
-
-```
