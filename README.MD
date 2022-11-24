@@ -183,11 +183,11 @@ This steps simulates what a browser would do before displaying a HTML to the use
 ```
 # Run the dummy server that will serve your HTML
 # file on port 3001 (default)
-dummyserver --file ./examples/aapple\&aamazon.html
+dummyserver --file ./examples/helloworld.html
 
 # Only resolution
-npx @fabcotech/junctions resolve "aapple.d & aamazon.d" -v
+npx @fabcotech/junctions resolve "bob.bsc & alice.bsc" --verbose
 
 # Resolution + check of the HTML file + display on screen
-npx @fabcotech/junctions resolve "aapple.d & aamazon.d" -v --load
+npx @fabcotech/junctions resolve "bob.bsc & alice.bsc" --verbose --load
 ```
