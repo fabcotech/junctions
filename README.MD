@@ -1,6 +1,6 @@
 ## Junctions
 
-![Junctions, by dappy team](https://raw.githubusercontent.com/fabcotech/junctions/master/board.png)
+![Junctions, by dappy team](https://raw.githubusercontent.com/fabcotech/junctions/master/image.png)
 
 A radically new and simple way to expose content and front-ends with multiple endorsement, (validation by multiple ideneities), without intermediary.
 
