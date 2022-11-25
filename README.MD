@@ -2,6 +2,10 @@
 
 ![Junctions, by dappy team](https://raw.githubusercontent.com/fabcotech/junctions/master/image.png)
 
+`riot.d & epicgames.bsn & blizzard.d`
+`bob.d & alice.d & mark.d`
+`uniswap.d & dydx.d`
+
 A radically new and simple way to expose content and front-ends with multiple endorsement, (validation by multiple ideneities), without intermediary.
 
 You may want to check the [video with slides](https://www.youtube.com/watch?v=d7I0-0riRh8). The video is not mandatory for understanding the project, this document is self-suffiscient. Also the video does not include Facility / Tutorial.
