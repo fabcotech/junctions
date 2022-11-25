@@ -3,7 +3,7 @@
 ![Junctions, by dappy team](https://raw.githubusercontent.com/fabcotech/junctions/master/image.png)
 
 `riot.d & epicgames.bsn & blizzard.d`
-`bob.d & alice.d & mark.d`
+`bob.com & alice.d & mark.us`
 `uniswap.d & dydx.d`
 
 A radically new and simple way to expose content and front-ends with multiple endorsement, (validation by multiple ideneities), without intermediary.
@@ -55,7 +55,7 @@ Our examples, and the following tutorial works with two identities, junctions ca
 
 ### Facility
 
-You (1) need nodeJS + npm (recent) installed, (2) a private key with funds on BNB chain (testnet).
+You (1) need nodeJS(18) + npm (recent) installed, (2) a private key with funds on BNB chain (testnet).
 
 ### Tutorial (hackaton)
 
